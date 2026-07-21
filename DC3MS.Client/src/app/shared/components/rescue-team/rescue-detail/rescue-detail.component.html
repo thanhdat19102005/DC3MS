@@ -1,0 +1,143 @@
+<div
+  class="detail-overlay"
+  [class.closing]="isClosing"
+  (click)="onClose()">
+
+  <div
+    class="detail-modal"
+    (click)="$event.stopPropagation()">
+
+    <div class="detail-header">
+      <h2>Chi Tiết Yêu Cầu</h2>
+
+      <button class="close-btn" (click)="onClose()">
+        ×
+      </button>
+    </div>
+
+    <div class="detail-body">
+
+      <span class="rescue-badge">
+        {{ request?.type || 'Không xác định' }}
+      </span>
+
+      <p class="request-content">
+        {{ request?.content || 'Không có nội dung yêu cầu' }}
+      </p>
+
+      <div class="section media-section" *ngIf="request?.mediaUrls?.length">
+        <h4>Hình Ảnh Hiện Trường</h4>
+
+        <div class="image-gallery">
+          <img
+            *ngFor="let img of request.mediaUrls"
+            [src]="img"
+            alt="Ảnh cứu hộ">
+        </div>
+      </div>
+
+      <div class="section">
+        <h4>Thông Tin Liên Hệ</h4>
+
+        <p>
+          Người yêu cầu:
+          <strong>{{ request?.userName || 'Người dùng' }}</strong>
+        </p>
+
+        <div class="phone-line">
+          <span>📞</span>
+
+          <strong>
+            {{ request?.phone || 'Không có số điện thoại' }}
+          </strong>
+        </div>
+
+        <p *ngIf="request?.alternativePhoneNumber">
+          SĐT phụ:
+          <strong>{{ request?.alternativePhoneNumber }}</strong>
+        </p>
+      </div>
+
+      <div class="section">
+        <h4>Thông Tin Chi Tiết</h4>
+
+        <p>
+          Số người:
+          <strong>{{ request?.people || 0 }}</strong>
+        </p>
+
+        <p>
+          Loại cứu hộ:
+          <strong>{{ request?.type || 'Không xác định' }}</strong>
+        </p>
+
+        <p>
+          Mức độ khẩn cấp:
+          <strong style="color:#dc2626">
+            {{ request?.severity || 'Không xác định' }}
+          </strong>
+        </p>
+
+        <p>
+          Tình trạng sức khỏe:
+          <strong>{{ request?.healthStatus || 'Không xác định' }}</strong>
+        </p>
+
+        <p *ngIf="request?.hasChildren">
+          Có trẻ em:
+          <strong>Có</strong>
+        </p>
+
+        <p *ngIf="request?.hasElderly">
+          Có người cao tuổi:
+          <strong>Có</strong>
+        </p>
+      </div>
+
+      <div class="section">
+        <h4>Vị Trí</h4>
+
+        <div class="coordinate-row">
+          <p>
+            {{ request?.latitude || 'Chưa có' }},
+            {{ request?.longitude || 'Chưa có' }}
+          </p>
+
+          <button
+            class="copy-btn"
+            [class.copied]="isCopied"
+            (click)="copyCoordinates()">
+            {{ isCopied ? '✅ Đã copy' : 'Copy tọa độ' }}
+          </button>
+        </div>
+
+        <div class="location-box">
+          <p>
+            <strong>Khoảng cách:</strong>
+            {{ request?.distance || '0 Km' }}
+          </p>
+
+          <p>
+            <strong>Thời gian ước tính:</strong>
+            ~Không xác định
+          </p>
+
+          <small>
+            * Thời gian có thể thay đổi tùy theo điều kiện giao thông và thời tiết
+          </small>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="detail-footer">
+      <button
+        class="close-text-btn"
+        (click)="onClose()">
+        ĐÓNG
+      </button>
+    </div>
+
+  </div>
+
+</div>

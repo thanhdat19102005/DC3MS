@@ -1,0 +1,105 @@
+<div class="video-page">
+
+  <div class="header">
+
+    <h2>Video Call Test</h2>
+
+    <p>
+      Phone:
+      <b>{{ phoneNumber }}</b>
+    </p>
+
+    <p>
+      Team ID:
+      <b>{{ teamId }}</b>
+    </p>
+
+    <p>
+      Room:
+      <b>{{ roomId || 'Đang join room...' }}</b>
+    </p>
+
+    <span>
+      {{ statusText }}
+    </span>
+
+  </div>
+
+  <div class="video-wrapper">
+
+    <video
+      #remoteVideo
+      autoplay
+      playsinline
+      class="remote-video">
+    </video>
+
+    <video
+      #localVideo
+      autoplay
+      playsinline
+      muted
+      class="local-video">
+    </video>
+
+    @if (hasIncomingCall) {
+      <div class="incoming-call">
+        <div class="incoming-card">
+
+          <div class="incoming-avatar">
+            📹
+          </div>
+
+          <h3>
+            Có cuộc gọi video đến
+          </h3>
+
+          <p>
+            Đội cứu hộ đang gọi video cho bạn
+          </p>
+
+          <div class="incoming-actions">
+            <button
+              type="button"
+              class="btn-reject"
+              (click)="rejectCall()">
+              Từ chối
+            </button>
+
+            <button
+              type="button"
+              class="btn-answer"
+              (click)="acceptCall()">
+              Nhận cuộc gọi
+            </button>
+          </div>
+
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <div class="actions">
+
+    <button
+      class="btn-camera"
+      (click)="startCamera()">
+      🎥 Bật camera
+    </button>
+
+    <button
+      class="btn-call"
+      (click)="startCall()">
+      📞 Gọi
+    </button>
+
+    <button
+      class="btn-end"
+      (click)="endCall()">
+      🔴 Kết thúc
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="auth-container">
+  <div class="auth-card register-card">
+    <div class="auth-header">
+      <div class="role-icon"><img src="/icon/user.png" alt="User Logo"></div>
+      <h2>Đăng Ký Tài Khoản</h2>
+      <p>Hệ thống Cứu Trợ Lũ Lụt</p>
+    </div>
+
+    <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+      
+      <!-- Họ Tên -->
+      <div class="input-group">
+        <label>Họ và Tên *</label>
+        <input type="text" formControlName="fullName" placeholder="Nguyễn Văn A" 
+               [class.is-invalid]="isSubmitted && registerForm.get('fullName')?.invalid">
+        <small class="error-text" *ngIf="isSubmitted && registerForm.get('fullName')?.errors?.['required']">
+          Vui lòng nhập họ tên
+        </small>
+      </div>
+
+      <div class="input-row">
+        <!-- SĐT -->
+        <div class="input-group">
+          <label>Số điện thoại *</label>
+          <input type="tel" formControlName="phoneNumber" placeholder="09xxxxxxxx"
+                 [class.is-invalid]="isSubmitted && registerForm.get('phoneNumber')?.invalid">
+          <small class="error-text" *ngIf="isSubmitted && registerForm.get('phoneNumber')?.invalid">
+            SĐT không đúng định dạng
+          </small>
+        </div>
+        <!-- Email -->
+        <div class="input-group">
+          <label>Email *</label>
+          <input type="email" formControlName="email" placeholder="vi-du@gmail.com"
+                 [class.is-invalid]="isSubmitted && registerForm.get('email')?.invalid">
+          <small class="error-text" *ngIf="isSubmitted && registerForm.get('email')?.invalid">
+            Email không hợp lệ
+          </small>
+        </div>
+      </div>
+
+      <!-- Địa chỉ -->
+      <div class="input-group">
+        <label>Địa chỉ hiện tại *</label>
+        <input type="text" formControlName="address" placeholder="Số nhà, tên đường..."
+               [class.is-invalid]="isSubmitted && registerForm.get('address')?.invalid">
+        <small class="error-text" *ngIf="isSubmitted && registerForm.get('address')?.invalid">
+          Vui lòng nhập địa chỉ cụ thể
+        </small>
+      </div>
+
+      <div class="input-row">
+        <!-- Mật khẩu -->
+        <div class="input-group">
+          <label>Mật khẩu *</label>
+          <input type="password" formControlName="password" placeholder="••••••••"
+                 [class.is-invalid]="isSubmitted && registerForm.get('password')?.invalid">
+          <small class="error-text" *ngIf="isSubmitted && registerForm.get('password')?.invalid">
+            Mật khẩu tối thiểu 6 ký tự
+          </small>
+        </div>
+        <!-- Xác nhận MK -->
+        <div class="input-group">
+          <label>Xác nhận mật khẩu *</label>
+          <input type="password" formControlName="confirmPassword" placeholder="••••••••"
+                 [class.is-invalid]="isSubmitted && registerForm.hasError('passwordMismatch')">
+          <small class="error-text" *ngIf="isSubmitted && registerForm.hasError('passwordMismatch')">
+            Xác nhận mật khẩu chưa khớp
+          </small>
+        </div>
+      </div>
+
+      <!-- Nút bấm luôn sẵn sàng để nhấn -->
+      <button type="submit" class="btn-submit">ĐĂNG KÝ NGAY</button>
+    </form>
+
+    <div class="register-section">
+      <div class="divider"><span>Hoặc</span></div>
+      <p>Đã có tài khoản?</p>
+      <button type="button" class="btn-back-login" (click)="goToLogin()">QUAY LẠI ĐĂNG NHẬP</button>
+    </div>
+  </div>
+</div>

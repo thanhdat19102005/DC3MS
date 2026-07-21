@@ -1,0 +1,102 @@
+.header-section {
+    text-align: left;
+    margin-bottom: 25px;
+    background: transparent;
+}
+
+.avatar-icon {
+    font-size: 45px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.form-title {
+    color: #1976d2;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    background: transparent;
+}
+
+.form-subtitle {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+    background: transparent;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: transparent;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: transparent;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #ffffff !important;
+    color: #333;
+    /* Hiệu ứng chuyển đổi mượt mà khi focus hoặc thu hồi focus */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+
+/* Hiệu ứng quầng sáng xanh dịu bao quanh khi người dùng nhấn chọn ô Input */
+.form-input:focus {
+    border-color: #1976d2;
+    outline: none;
+    box-shadow: 0 0 4px rgba(25, 118, 210, 0.4);
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+}
+
+.button-wrapper {
+    text-align: left;
+    margin-top: 5px;
+    background: transparent;
+}
+
+.btn-submit {
+    background: #1976d2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background: #1565c0;
+}
+
+.btn-submit:disabled {
+    background: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}

@@ -1,0 +1,273 @@
+<div class="modal-root" [class.is-closing]="isClosing">
+  <div class="modal-overlay" (click)="closeWithAnimation()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      
+      <div class="modal-header">
+        <div class="header-title">
+          <h2>
+            {{ isEditing ? 'Chỉnh Sửa Yêu Cầu' : (isViewingDetail ? 'Chi Tiết Yêu Cầu' : 'Yêu Cầu Của Tôi') }}
+          </h2>
+        </div>
+        <div class="header-actions">
+          @if (!isEditing && !isViewingDetail && !isLoading && !errorMessage) {
+            <button class="btn-refresh" title="Làm mới" (click)="loadActiveRequest()">🔄</button>
+          }
+          <button class="btn-close" (click)="isViewingDetail ? closeDetailView() : closeWithAnimation()">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body scrollable-body" [class.view-fade-out]="isSwitchingView">
+        
+        @if (isLoading) {
+          <div class="loading-state text-center">
+            <div class="spinner"></div>
+            <p style="margin-top: 12px; color: #666; font-size: 13px;">Đang đồng bộ dữ liệu từ tổng đài trực ban...</p>
+          </div>
+        } 
+        
+        @else if (errorMessage) {
+          <div class="empty-state text-center">
+            <span style="font-size: 36px;">📑</span>
+            <p style="margin-top: 12px; color: #555; font-weight: 500; font-size: 13.5px; padding: 0 10px;">
+              {{ errorMessage }}
+            </p>
+          </div>
+        } 
+        
+        @else if (isEditing) {
+          <form [formGroup]="editForm" (ngSubmit)="submitEdit()" class="form-edit-container">
+            
+            <div class="alert-warning-edit">
+              ⚠️ Vui lòng cung cấp chính xác thông tin để hỗ trợ điều phối.
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Loại Ứng Cứu *</label>
+              <div class="custom-dropdown-container">
+                <div class="custom-dropdown-selected" (click)="toggleRescueTypeDropdown($event)">
+                  <span>{{ editForm.get('rescueType')?.value }}</span>
+                  <span class="dropdown-arrow-icon" [style.transform]="showRescueTypeDropdown ? 'rotate(180deg)' : 'rotate(0deg)'">▼</span>
+                </div>
+                @if (showRescueTypeDropdown) {
+                  <div class="custom-dropdown-list">
+                    <div class="custom-dropdown-item" (click)="selectRescueType('Di Tản')">Di Tản</div>
+                    <div class="custom-dropdown-item" (click)="selectRescueType('Y Tế')">Y Tế</div>
+                    <div class="custom-dropdown-item" (click)="selectRescueType('Lương Thực')">Lương Thực</div>
+                    <div class="custom-dropdown-item" (click)="selectRescueType('Cứu Hộ Xuồng')">Cứu Hộ Xuồng</div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Mức Độ Khẩn Cấp *</label>
+              <div class="custom-dropdown-container">
+                <div class="custom-dropdown-selected" (click)="toggleUrgencyDropdown($event)">
+                  <span>{{ editForm.get('urgencyLevel')?.value }}</span>
+                  <span class="dropdown-arrow-icon" [style.transform]="showUrgencyDropdown ? 'rotate(180deg)' : 'rotate(0deg)'">▼</span>
+                </div>
+                @if (showUrgencyDropdown) {
+                  <div class="custom-dropdown-list">
+                    <div class="custom-dropdown-item" (click)="selectUrgencyLevel('Bình Thường')">Bình Thường</div>
+                    <div class="custom-dropdown-item" (click)="selectUrgencyLevel('Khẩn Cấp')">Khẩn Cấp</div>
+                    <div class="custom-dropdown-item" (click)="selectUrgencyLevel('Nguy Kịch')">Nguy Kịch</div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Số Người Cần Cứu Trợ *</label>
+              <input type="number" formControlName="peopleCount" class="input-field-edit" />
+            </div>
+
+            <div class="checkbox-row-edit">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="hasChildren" />
+                <span>👶 Có Trẻ Em</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="hasElderly" />
+                <span>👵 Có Người Già</span>
+              </label>
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Tình Trạng Sức Khỏe *</label>
+              <div class="custom-dropdown-container">
+                <div class="custom-dropdown-selected" (click)="toggleHealthDropdown($event)">
+                  <span>{{ editForm.get('healthStatus')?.value }}</span>
+                  <span class="dropdown-arrow-icon" [style.transform]="showHealthDropdown ? 'rotate(180deg)' : 'rotate(0deg)'">▼</span>
+                </div>
+                @if (showHealthDropdown) {
+                  <div class="custom-dropdown-list">
+                    <div class="custom-dropdown-item" (click)="selectHealthStatus('Bình Thường')">Bình Thường</div>
+                    <div class="custom-dropdown-item" (click)="selectHealthStatus('Chấn Thương')">Chấn Thương</div>
+                    <div class="custom-dropdown-item" (click)="selectHealthStatus('Đau Ốm Cấp Tính')">Đau Ốm Cấp Tính</div>
+                    <div class="custom-dropdown-item" (click)="selectHealthStatus('Nguy Kịch')">Nguy Kịch</div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Số Điện Thoại Liên Hệ (Nếu khác số đăng ký)</label>
+              <input 
+                type="text" 
+                formControlName="alternativePhoneNumber" 
+                class="input-field-edit" 
+                [class.input-error-border]="editForm.get('alternativePhoneNumber')?.touched && editForm.get('alternativePhoneNumber')?.invalid"
+                placeholder="Nhập số điện thoại phụ..." 
+              />
+              @if (editForm.get('alternativePhoneNumber')?.touched && editForm.get('alternativePhoneNumber')?.invalid) {
+                <span style="color: #d32f2f; font-size: 0.78rem; font-weight: 600; margin-top: 5px; margin-left: 4px;">
+                  Vui lòng nhập số điện thoại Việt Nam hợp lệ (gồm 10 chữ số).
+                </span>
+              }
+            </div>
+
+            <div class="form-group-edit">
+              <label class="label-edit">Mô tả nhu cầu của bạn</label>
+              <textarea formControlName="content" class="input-field-edit textarea-edit" placeholder="Mô tả nhu cầu của bạn..."></textarea>
+            </div>
+
+            <div class="form-group-edit">
+              <button type="button" class="btn-gps-refresh" (click)="refreshLocation()" [disabled]="isFetchingGPS">
+                 {{ isFetchingGPS ? 'Đang xác vị trí thực tế...' : 'Nhấn lấy tọa độ GPS mới' }}
+              </button>
+              <span class="location-preview-text">
+                Tọa độ lưu trong đơn: {{ editForm.value.latitude | number:'1.5-5' }}, {{ editForm.value.longitude | number:'1.5-5' }}
+              </span>
+            </div>
+
+            <div class="form-actions-edit">
+              <button type="button" class="btn-cancel-edit" (click)="cancelEdit()" [disabled]="isSaving">Hủy</button>
+              <button type="submit" class="btn-submit-edit" [disabled]="isSaving">
+                 {{ isSaving ? 'Đang gửi...' : 'GỬI CỨU HỘ' }}
+              </button>
+            </div>
+
+          </form>
+        }
+
+        @else if (isViewingDetail && userRequest) {
+          <div class="detail-view-container">
+            
+            <div class="detail-tags-row">
+              <span class="tag-status" [ngClass]="{
+                'orange': userRequest.statusCode === 0,
+                'blue-bg': userRequest.statusCode === 1,
+                'green-bg': userRequest.statusCode === 2
+              }">{{ getStatusText(userRequest.statusCode) }}</span>
+              <span class="tag-urgency red">{{ userRequest.urgency }}</span>
+              <span class="tag-type-badge">{{ userRequest.type }}</span>
+            </div>
+
+            <div class="detail-section-block">
+              <h3 class="detail-block-title">Mô Tả:</h3>
+              <p class="detail-block-content text-desc-content">
+                {{ userRequest.content || 'Không có mô tả chi tiết hoàn cảnh.' }}
+              </p>
+            </div>
+
+            <div class="detail-section-block">
+              <h3 class="detail-block-title">Thông Tin:</h3>
+              <div class="detail-info-list">
+                <div class="detail-info-item">
+                   <strong>Số người cần hỗ trợ:</strong> <span>{{ userRequest.peopleCount }} người</span>
+                </div>
+                <div class="detail-info-item text-red">
+                   <strong>Tình trạng sức khỏe:</strong> <span>{{ userRequest.healthStatus }}</span>
+                </div>
+                <div class="detail-info-item">
+                   <strong>Nhóm đối tượng:</strong> 
+                  <span>
+                    {{ (userRequest.hasChildren ? 'Có Trẻ Em' : '') + 
+                       (userRequest.hasChildren && userRequest.hasElderly ? ' • ' : '') + 
+                       (userRequest.hasElderly ? 'Có Người Già' : '') || 'Không có trẻ nhỏ/người già' }}
+                  </span>
+                </div>
+                <div class="detail-info-item">
+                   <strong>Số điện thoại dự phòng:</strong> <span>{{ userRequest.alternativePhoneNumber }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-section-block">
+              <h3 class="detail-block-title">Vị Trí Định Vị GPS:</h3>
+            <div class="detail-location-box">
+  <span>{{ userRequest.latitude | number:'1.6-6' }}, {{ userRequest.longitude | number:'1.6-6' }}</span>
+  
+  <button type="button" class="btn-share-location-stub" (click)="copyShareLink($event)">
+    🔗 Copy Link Vị Trí
+  </button>
+</div>
+            </div>
+
+            <div class="detail-time-stamp-row">
+               <span><strong>Tạo lúc:</strong> {{ userRequest.time }}</span>
+            </div>
+
+
+
+            
+            <div class="detail-footer-actions">
+              <button class="btn-detail-action btn-detail-edit" (click)="editRequest()"> Chỉnh Sửa</button>
+              <button class="btn-detail-action btn-detail-cancel" (click)="cancelRequest()"> Hủy Yêu Cầu</button>
+              <button class="btn-detail-action btn-detail-close" (click)="closeDetailView()">Đóng</button>
+            </div>
+
+          </div>
+        }
+
+        @else if (userRequest) {
+          <div class="card-request" [ngClass]="'status-' + userRequest.statusCode">
+            <div class="card-header">
+              <span class="request-type">{{ userRequest.type }}</span>
+              <div class="tags">
+                <span class="tag-status" [ngClass]="{
+                  'orange': userRequest.statusCode === 0,
+                  'blue-bg': userRequest.statusCode === 1,
+                  'green-bg': userRequest.statusCode === 2
+                }">
+                  {{ getStatusText(userRequest.statusCode) }}
+                </span>
+                <span class="tag-urgency red">{{ userRequest.urgency }}</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="request-content">{{ userRequest.content }}</p>
+              
+              <div class="meta-info">
+                <div class="meta-item text-red">
+                   <span>{{ userRequest.peopleCount }} người</span> • <strong>[{{ userRequest.healthStatus }}]</strong>
+                </div>
+                <div class="meta-item text-gray">
+                   <span>{{ userRequest.location }}</span>
+                </div>
+                <div class="meta-item text-gray flex-center">
+                   <span>{{ userRequest.time }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn-action btn-edit" (click)="editRequest()"> Chỉnh Sửa</button>
+              <button class="btn-action btn-cancel" (click)="cancelRequest()"> Hủy Yêu Cầu</button>
+              <button class="btn-action btn-detail" (click)="viewDetails()">Xem Chi Tiết</button>
+            </div>
+          </div>
+        }
+
+
+
+
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

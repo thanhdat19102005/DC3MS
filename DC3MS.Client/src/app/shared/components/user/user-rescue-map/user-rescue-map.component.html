@@ -1,0 +1,84 @@
+<div class="user-map-card">
+
+  <div class="user-map-header">
+
+    <div class="map-title-wrap">
+      <div class="map-title-icon">
+        📍
+      </div>
+
+      <div>
+        <h3>BẢN ĐỒ CỨU TRỢ</h3>
+        <p>Theo dõi vị trí yêu cầu, đội cứu hộ và khu vực nguy hiểm</p>
+      </div>
+    </div>
+
+    <div class="map-filter-bar">
+
+      <div class="team-count-box">
+        <span>Đội cứu hộ đang hoạt động</span>
+        <strong>{{ rescueTeams.length }}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="user-map-wrapper">
+
+    <div id="user-rescue-map"></div>
+
+    <button
+      type="button"
+      class="my-location-btn"
+      (click)="goToMyLocation()">
+      Vị trí của tôi
+    </button>
+
+  </div>
+
+  <div class="map-legend-inline">
+
+    <span>
+      <b class="dot danger"></b>
+      Yêu cầu khẩn cấp
+    </span>
+
+    <span>
+      <b class="dot warning"></b>
+      Yêu cầu đang xử lý
+    </span>
+
+    <span>
+      <b class="dot success"></b>
+      Yêu cầu đã hoàn thành
+    </span>
+
+    <span>
+      <b class="dot team"></b>
+      Đội cứu hộ
+    </span>
+
+    <span>
+      <b class="line-route"></b>
+      Lộ trình di chuyển
+    </span>
+
+    <span>
+      <b class="zone red"></b>
+      Khu vực nguy hiểm
+    </span>
+
+    <span>
+      <b class="zone yellow"></b>
+      Khu vực cảnh báo
+    </span>
+
+    <span>
+      <b class="zone green"></b>
+      Khu vực an toàn
+    </span>
+
+  </div>
+
+</div>

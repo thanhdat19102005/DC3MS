@@ -1,0 +1,32 @@
+<div class="header-section">
+    <div class="avatar-icon">
+        <i class="bi bi-person-circle"></i>
+    </div>
+    <h2 class="form-title">Thêm thông tin cứu trợ</h2>
+    <p class="form-subtitle">Hệ thống Cứu Trợ Lũ Lụt</p>
+</div>
+
+<form [formGroup]="reliefForm" (ngSubmit)="onSubmit()" class="form-content">
+    
+    <div class="form-group">
+        <label class="form-label">Số điện thoại *</label>
+        <input type="text" formControlName="phoneNumber" class="form-input" placeholder="09xxxxxxxx">
+        <small *ngIf="reliefForm.get('phoneNumber')?.touched && reliefForm.get('phoneNumber')?.invalid" class="error-text">
+            Vui lòng nhập đúng định dạng số điện thoại (10 số).
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Địa chỉ hiện tại *</label>
+        <input type="text" formControlName="address" class="form-input" placeholder="Số nhà, tên đường...">
+        <small *ngIf="reliefForm.get('address')?.touched && reliefForm.get('address')?.invalid" class="error-text">
+            Vui lòng nhập địa chỉ cụ thể hiện tại của bạn.
+        </small>
+    </div>
+    
+    <div class="button-wrapper">
+        <button type="submit" [disabled]="reliefForm.invalid || isSending()" class="btn-submit">
+            {{ isSending() ? 'ĐANG XỬ LÝ...' : 'THÊM THÔNG TIN NGAY' }}
+        </button>
+    </div>
+</form>

@@ -1,0 +1,284 @@
+<section class="dashboard-header">
+
+  <div>
+    <h1>Liên hệ đội cứu hộ</h1>
+    <p>
+      Theo dõi vị trí và liên hệ nhanh với các đội cứu hộ đang hoạt động
+    </p>
+  </div>
+
+  <div class="header-action">
+    <button
+      type="button"
+      (click)="reloadMapData()">
+
+      <span class="material-symbols-outlined">
+        refresh
+      </span>
+
+      Làm mới dữ liệu
+    </button>
+  </div>
+
+</section>
+
+<div class="admin-map-card">
+
+  <div class="admin-map-header">
+
+    <div class="map-title-wrap">
+      <div class="map-title-icon">
+        <span class="material-symbols-outlined">location_on</span>
+      </div>
+
+      <div>
+        <h3>BẢN ĐỒ ĐỘI CỨU HỘ</h3>
+        <p>Hiển thị vị trí, số điện thoại và khu vực phụ trách của từng đội</p>
+      </div>
+    </div>
+
+    <div class="team-count-box">
+      <span>Đội đang hoạt động</span>
+      <strong>{{ rescueTeams.length }}</strong>
+    </div>
+
+  </div>
+
+  @if (isLoadingTeams) {
+    <div class="map-loading">
+      <span class="material-symbols-outlined loading-icon">
+        progress_activity
+      </span>
+
+      <p>Đang tải bản đồ đội cứu hộ...</p>
+    </div>
+  }
+
+  <div class="admin-map-wrapper">
+    <div id="admin-rescue-contact-map"></div>
+
+    <button
+      type="button"
+      class="my-location-btn"
+      (click)="goToVietnam()">
+      Về bản đồ Việt Nam
+    </button>
+  </div>
+
+  <div class="map-legend-inline">
+
+    <span>
+      <b class="dot team"></b>
+      Đội cứu hộ
+    </span>
+
+    <span>
+      <b class="zone red"></b>
+      Khu vực nguy hiểm
+    </span>
+
+    <span>
+      <b class="zone yellow"></b>
+      Khu vực cảnh báo
+    </span>
+
+    <span>
+      <b class="zone green"></b>
+      Khu vực an toàn
+    </span>
+
+  </div>
+
+</div>
+
+@if (isRequestModalOpen) {
+  <div class="rescue-request-overlay">
+
+    <div
+      class="rescue-request-modal"
+      [formGroup]="rescueForm">
+
+      <button
+        type="button"
+        class="modal-close-btn"
+        (click)="closeRequestModal()">
+        ×
+      </button>
+
+      <h2>Đơn cứu trợ chi tiết</h2>
+
+      <p class="modal-team">
+        Gửi yêu cầu đến:
+        <strong>{{ selectedTeam?.teamName || 'Đội cứu hộ' }}</strong>
+      </p>
+
+      <div class="modal-note">
+        <span class="material-symbols-outlined">warning</span>
+        Vui lòng cung cấp chính xác thông tin để hỗ trợ điều phối.
+      </div>
+
+      <div class="form-grid">
+
+        <label>
+          Loại ứng cứu *
+
+          <select formControlName="rescueType">
+            <option value="Di Tản">Di Tản</option>
+            <option value="Y Tế">Y Tế</option>
+            <option value="Lương Thực">Lương Thực</option>
+            <option value="Cứu Hộ Xuồng">Cứu Hộ Xuồng</option>
+          </select>
+        </label>
+
+        <label>
+          Mức độ khẩn cấp *
+
+          <select formControlName="urgencyLevel">
+            <option value="Bình Thường">Bình Thường</option>
+            <option value="Khẩn Cấp">Khẩn Cấp</option>
+            <option value="Nguy Kịch">Nguy Kịch</option>
+          </select>
+        </label>
+
+        <label>
+          Số người cần cứu trợ *
+
+          <input
+            type="number"
+            min="1"
+            formControlName="peopleCount">
+        </label>
+
+        <div class="checkbox-row">
+
+          <label>
+            <input
+              type="checkbox"
+              formControlName="hasChildren">
+
+            👶 Có Trẻ Em
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              formControlName="hasElderly">
+
+            🧓 Có Người Già
+          </label>
+
+        </div>
+
+        <label>
+          Tình trạng sức khỏe *
+
+          <select formControlName="healthStatus">
+            <option value="Bình Thường">Bình Thường</option>
+            <option value="Chấn Thương">Chấn Thương / Gãy Xương</option>
+            <option value="Đau Ốm Cấp Tính">Đau Ốm Cấp Tính / Sốt Cao</option>
+          </select>
+        </label>
+
+        <label>
+          Số điện thoại liên hệ
+
+          <input
+            type="text"
+            formControlName="alternativePhoneNumber"
+            placeholder="Nhập số điện thoại phụ...">
+        </label>
+
+        <label class="full">
+          Ghi chú
+
+          <textarea
+            rows="4"
+            [(ngModel)]="transcript"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Mô tả nhu cầu cứu hộ...">
+          </textarea>
+        </label>
+
+        <div class="coordinate-row">
+
+          <label>
+            Vĩ độ người cần cứu *
+
+            <input
+              type="number"
+              step="any"
+              formControlName="latitude"
+              placeholder="Ví dụ: 10.7765">
+          </label>
+
+          <label>
+            Kinh độ người cần cứu *
+
+            <input
+              type="number"
+              step="any"
+              formControlName="longitude"
+              placeholder="Ví dụ: 106.7010">
+          </label>
+
+        </div>
+
+        <label class="full">
+          Ảnh hiện trường
+
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            (change)="onFileSelected($event)">
+        </label>
+
+        @if (imagePreviews.length > 0) {
+          <div class="preview-container full">
+            @for (url of imagePreviews; track $index) {
+              <div class="preview-item">
+                <img
+                  [src]="url"
+                  class="img-thumb">
+
+                <button
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeImage($index)">
+                  ×
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+      </div>
+
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeRequestModal()">
+          Hủy
+        </button>
+
+        <button
+          type="button"
+          class="submit-btn"
+          [disabled]="isSending"
+          (click)="sendRequest()">
+
+          {{
+            isSending
+              ? 'ĐANG GỬI...'
+              : 'Gửi yêu cầu cứu hộ'
+          }}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+}

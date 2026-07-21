@@ -1,0 +1,52 @@
+<div class="weather-app-wrapper">
+  
+  <div class="weather-info-bar">
+    <div class="status-indicator">
+      <button class="btn-back-home" routerLink="/user"> Quay lại</button>
+      
+      <span class="live-dot" [class.pulse]="isPlaying()" [class.temp-mode]="currentMode() === 'temperature'"></span>
+      <span class="time-text">{{ currentTimeString() }}</span>
+    </div>
+
+    <div class="control-actions">
+      <div class="mode-switch">
+        <button [class.active]="currentMode() === 'rain'" (click)="changeMode('rain')"> Lượng mưa</button>
+        <button [class.active]="currentMode() === 'temperature'" (click)="changeMode('temperature')"> Lưu lượng nhiệt</button>
+      </div>
+      <button class="btn-control" (click)="togglePlay()">
+        {{ isPlaying() ? '⏸️ Dừng' : '▶️ Chạy' }}
+      </button>
+    </div>
+  </div>
+
+  <div id="weather-map" class="map-container">
+    @if (isVisualizing()) {
+      <div class="loading-overlay">
+        <div class="spinner"></div>
+        <span>Đang đồng bộ dữ liệu khí tượng thủy văn quốc gia...</span>
+      </div>
+    }
+  </div>
+
+  <div class="weather-legend">
+    @if (currentMode() === 'rain') {
+      <div class="legend-title">Cường độ lượng mưa phản hồi radar bão (VNDMS Standard)</div>
+      <div class="legend-gradient-bar rain-bar"></div>
+      <div class="legend-labels">
+        <span>Mưa Nhẹ</span>
+        <span>Mưa Vừa</span>
+        <span>Mưa To</span>
+        <span>Rất To (Nguy cơ lũ quét/Ngập úng)</span>
+      </div>
+    } @else {
+      <div class="legend-title">Biểu đồ phân tích lưu lượng vùng hấp nhiệt cao (Mô phỏng độ C)</div>
+      <div class="legend-gradient-bar temp-bar"></div>
+      <div class="legend-labels">
+        <span>Mát mẻ (Dưới 20°C)</span>
+        <span>Ấm áp (25°C)</span>
+        <span>Nắng gắt (32°C)</span>
+        <span>Chảo lửa cực đoan (Trên 40°C)</span>
+      </div>
+    }
+  </div>
+</div>

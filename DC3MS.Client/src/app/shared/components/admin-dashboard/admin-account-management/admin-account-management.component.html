@@ -1,0 +1,416 @@
+<div class="admin-account-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Quản lý quản trị viên</h2>
+      <p>Danh sách tài khoản Admin và SuperAdmin</p>
+    </div>
+
+    <button
+      class="btn-create"
+      type="button"
+      (click)="openCreate()">
+      <span class="material-symbols-outlined">add</span>
+      Tạo quản trị viên
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="material-symbols-outlined">search</span>
+
+      <input
+        type="text"
+        placeholder="Tìm theo họ tên, tên đăng nhập, email, số điện thoại, vai trò..."
+        [(ngModel)]="searchText"
+        (input)="onSearch()"
+      />
+    </div>
+
+    <div class="total-box">
+      Tổng quản trị viên:
+      <b>{{ filteredAdmins.length }}</b>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-box">
+      Đang tải dữ liệu...
+    </div>
+  }
+
+  @if (!isLoading) {
+    <div class="table-card">
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Họ tên</th>
+              <th>Tên đăng nhập</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Vai trò</th>
+              <th class="text-right">Thao tác</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of filteredAdmins; track item.id; let i = $index) {
+              <tr>
+                <td><b>{{ i + 1 }}</b></td>
+                <td>{{ item.fullName || 'Chưa cập nhật' }}</td>
+                <td>{{ item.userName || 'Chưa có tên đăng nhập' }}</td>
+                <td>{{ item.email || 'Chưa có email' }}</td>
+                <td>{{ item.phoneNumber || 'Chưa có SĐT' }}</td>
+
+                <td>
+                  <span
+                    class="role-badge"
+                    [class]="getRoleClass(item.roleName)">
+                    {{ item.roleName }}
+                  </span>
+                </td>
+
+                <td class="text-right">
+                  <div class="action-group">
+                    <button
+                      type="button"
+                      class="btn-detail"
+                      (click)="openDetail(item)">
+                      Chi tiết
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-update"
+                      (click)="openUpdate(item)">
+                      Cập nhật
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-delete"
+                      (click)="deleteAdminAccount(item)">
+                      Xóa
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (filteredAdmins.length === 0) {
+        <div class="empty-state">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          <p>Không có tài khoản quản trị viên nào.</p>
+        </div>
+      }
+
+      <div class="table-footer">
+        <span>
+          Hiển thị
+          <b>{{ filteredAdmins.length > 0 ? 1 : 0 }}</b>
+          đến
+          <b>{{ filteredAdmins.length }}</b>
+          trong
+          <b>{{ filteredAdmins.length }}</b>
+          mục
+        </span>
+
+        <div class="pagination">
+          <button type="button" disabled>‹</button>
+          <button type="button" class="page-active">1</button>
+          <button type="button" disabled>›</button>
+        </div>
+      </div>
+
+    </div>
+  }
+
+</div>
+
+@if (selectedAdmin) {
+  <div
+    class="modal-overlay"
+    (click)="closeDetail()">
+
+    <div
+      class="modal-card"
+      (click)="$event.stopPropagation()">
+
+      <button
+        type="button"
+        class="modal-close"
+        (click)="closeDetail()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+        </div>
+
+        <div>
+          <h3>{{ selectedAdmin.fullName || selectedAdmin.userName }}</h3>
+          <p>Thông tin chi tiết tài khoản quản trị viên</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label>Họ tên</label>
+          <b>{{ selectedAdmin.fullName || 'Chưa cập nhật' }}</b>
+        </div>
+
+        <div class="form-field">
+          <label>Tên đăng nhập</label>
+          <b>{{ selectedAdmin.userName || 'Chưa có' }}</b>
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <b>{{ selectedAdmin.email || 'Chưa có' }}</b>
+        </div>
+
+        <div class="form-field">
+          <label>Số điện thoại</label>
+          <b>{{ selectedAdmin.phoneNumber || 'Chưa có' }}</b>
+        </div>
+
+        <div class="form-field">
+          <label>Vai trò</label>
+          <span
+            class="role-badge"
+            [class]="getRoleClass(selectedAdmin.roleName)">
+            {{ selectedAdmin.roleName }}
+          </span>
+        </div>
+
+        <div class="form-field form-full">
+          <label>Địa chỉ</label>
+          <b>{{ selectedAdmin.address || 'Chưa cập nhật' }}</b>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+}
+
+@if (isCreateOpen) {
+  <div
+    class="modal-overlay"
+    (click)="closeCreate()">
+
+    <div
+      class="modal-card"
+      (click)="$event.stopPropagation()">
+
+      <button
+        type="button"
+        class="modal-close"
+        (click)="closeCreate()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon">
+          <span class="material-symbols-outlined">person_add</span>
+        </div>
+
+        <div>
+          <h3>Tạo tài khoản quản trị viên</h3>
+          <p>Chỉ SuperAdmin mới được tạo tài khoản quản trị</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label>Họ tên</label>
+          <input
+            type="text"
+            placeholder="Ví dụ: Nguyễn Văn A"
+            [(ngModel)]="createModel.fullName"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Tên đăng nhập</label>
+          <input
+            type="text"
+            placeholder="Ví dụ: admin_q1"
+            [(ngModel)]="createModel.userName"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Ví dụ: admin@gmail.com"
+            [(ngModel)]="createModel.email"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Số điện thoại</label>
+          <input
+            type="text"
+            placeholder="Ví dụ: 0901234567"
+            [(ngModel)]="createModel.phoneNumber"
+          />
+        </div>
+
+        <div class="form-field form-full">
+          <label>Địa chỉ</label>
+          <input
+            type="text"
+            placeholder="Nhập địa chỉ quản trị viên"
+            [(ngModel)]="createModel.address"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Mật khẩu</label>
+          <input
+            type="password"
+            placeholder="Nhập mật khẩu"
+            [(ngModel)]="createModel.password"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Vai trò</label>
+          <select [(ngModel)]="createModel.roleName">
+            <option value="Admin">Admin</option>
+            <option value="SuperAdmin">SuperAdmin</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="action-row">
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="closeCreate()">
+          Hủy
+        </button>
+
+        <button
+          type="button"
+          class="btn-save"
+          (click)="submitCreate()">
+          Tạo mới
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+@if (isUpdateOpen && updateModel) {
+  <div
+    class="modal-overlay"
+    (click)="closeUpdate()">
+
+    <div
+      class="modal-card"
+      (click)="$event.stopPropagation()">
+
+      <button
+        type="button"
+        class="modal-close"
+        (click)="closeUpdate()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon">
+          <span class="material-symbols-outlined">edit_note</span>
+        </div>
+
+        <div>
+          <h3>Cập nhật quản trị viên</h3>
+          <p>Để trống mật khẩu nếu không muốn đổi mật khẩu</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-field">
+          <label>Họ tên</label>
+          <input
+            type="text"
+            [(ngModel)]="updateModel.fullName"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Tên đăng nhập</label>
+          <input
+            type="text"
+            [(ngModel)]="updateModel.userName"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <input
+            type="email"
+            [(ngModel)]="updateModel.email"
+          />
+        </div>
+
+        <div class="form-field">
+          <label>Số điện thoại</label>
+          <input
+            type="text"
+            [(ngModel)]="updateModel.phoneNumber"
+          />
+        </div>
+
+        <div class="form-field form-full">
+          <label>Địa chỉ</label>
+          <input
+            type="text"
+            [(ngModel)]="updateModel.address"
+          />
+        </div>
+
+        <div class="form-field form-full">
+          <label>Mật khẩu mới</label>
+          <input
+            type="password"
+            placeholder="Để trống nếu không đổi mật khẩu"
+            [(ngModel)]="updateModel.password"
+          />
+        </div>
+
+      </div>
+
+      <div class="action-row">
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="closeUpdate()">
+          Hủy
+        </button>
+
+        <button
+          type="button"
+          class="btn-save"
+          (click)="submitUpdate()">
+          Lưu cập nhật
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

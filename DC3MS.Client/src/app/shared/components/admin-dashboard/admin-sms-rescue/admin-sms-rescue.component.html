@@ -1,0 +1,302 @@
+<section class="sms-header">
+  <div>
+    <h1>Gửi SMS cứu hộ</h1>
+    <p>Gửi tin nhắn SMS đến người dân khi không có Internet</p>
+  </div>
+
+  <button type="button" (click)="reloadData()">
+    <span class="material-symbols-outlined">refresh</span>
+    Làm mới dữ liệu
+  </button>
+</section>
+
+<section class="sms-page-grid">
+
+  <div class="sms-card sms-compose-card">
+
+    <div class="card-title">
+      <div class="title-icon">
+        <span class="material-symbols-outlined">sms</span>
+      </div>
+
+      <h3>TẠO TIN NHẮN SMS</h3>
+    </div>
+
+    <div class="form-group">
+      <label>Chế độ gửi <b>*</b></label>
+
+      <div class="send-mode-box">
+
+        <button
+          type="button"
+          class="mode-option"
+          [class.active]="receiverMode === 'single'"
+          (click)="onReceiverModeChange('single')">
+
+          <span class="material-symbols-outlined">person</span>
+
+          <div>
+            <strong>Gửi từng cá nhân</strong>
+            <p>Gửi SMS cho một số điện thoại cụ thể</p>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="mode-option"
+          [class.active]="receiverMode === 'all'"
+          (click)="onReceiverModeChange('all')">
+
+          <span class="material-symbols-outlined">groups</span>
+
+          <div>
+            <strong>Gửi toàn bộ người dân</strong>
+            <p>Gửi SMS cho tất cả tài khoản người dân</p>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    @if (receiverMode === 'single') {
+      <div class="form-group">
+        <label>Số điện thoại nhận <b>*</b></label>
+
+        <input
+          type="text"
+          [(ngModel)]="phoneNumber"
+          placeholder="Nhập số điện thoại VD: 0763270005">
+      </div>
+    }
+
+    @if (receiverMode === 'all') {
+      <div class="all-receiver-alert">
+        <span class="material-symbols-outlined">campaign</span>
+
+        <div>
+          <strong>Gửi đến toàn bộ người dân</strong>
+          <p>Hệ thống sẽ lấy số điện thoại của tất cả tài khoản có vai trò người dân.</p>
+        </div>
+      </div>
+    }
+
+    <div class="form-group">
+      <div class="label-row">
+        <label>Nội dung tin nhắn <b>*</b></label>
+        <span>{{ characterCount }}/160 ký tự</span>
+      </div>
+
+      <textarea
+        rows="5"
+        maxlength="160"
+        [(ngModel)]="messageContent"
+        placeholder="Nhập nội dung tin nhắn SMS...">
+      </textarea>
+    </div>
+
+    <div class="sms-note">
+      <span class="material-symbols-outlined">check_circle</span>
+      Lưu ý: Tin nhắn SMS tối đa 160 ký tự. Tin nhắn dài hơn sẽ được tách thành nhiều tin.
+    </div>
+
+    <div class="form-group">
+      <label>Loại SMS</label>
+
+      <select [(ngModel)]="smsType">
+        <option>Android Gateway</option>
+        <option>Đầu số ngẫu nhiên</option>
+        <option>Brandname</option>
+        <option>Đầu số cố định</option>
+      </select>
+    </div>
+
+    <button
+      type="button"
+      class="send-sms-btn"
+      [disabled]="isSending"
+      (click)="sendSms()">
+
+      <span class="material-symbols-outlined">
+        {{ isSending ? 'progress_activity' : 'send' }}
+      </span>
+
+      {{
+        isSending
+          ? 'Đang gửi SMS...'
+          : (receiverMode === 'all'
+              ? 'Gửi SMS toàn bộ người dân'
+              : 'Gửi SMS ngay')
+      }}
+    </button>
+
+  </div>
+
+  <div class="sms-card sms-history-card">
+
+    <div class="history-header">
+      <div class="card-title">
+        <div class="title-icon">
+          <span class="material-symbols-outlined">mark_chat_unread</span>
+        </div>
+
+        <h3>TIN NHẮN NGƯỜI DÂN PHẢN HỒI</h3>
+      </div>
+
+      <select
+        [(ngModel)]="statusFilter"
+        (change)="onStatusFilterChange()">
+        <option value="all">Tất cả tin nhắn</option>
+        <option value="received">Đã nhận</option>
+      </select>
+    </div>
+
+    @if (isLoadingHistory) {
+      <div class="sms-loading">
+        <span class="material-symbols-outlined loading-spin">progress_activity</span>
+        <p>Đang tải SMS người dân phản hồi...</p>
+      </div>
+    }
+
+    @if (!isLoadingHistory) {
+      <div class="sms-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Số điện thoại</th>
+              <th>Nội dung</th>
+              <th>Thời gian nhận</th>
+              <th>Trạng thái</th>
+              <th>Chi tiết</th>
+              <th>Xóa</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of paginatedSmsHistory; let i = index">
+              <td>{{ displayStart + i }}</td>
+              <td>{{ item.phone }}</td>
+              <td class="sms-content-cell">{{ item.content }}</td>
+              <td>{{ item.time }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="getStatusClass(item.status)">
+                  {{ getStatusText(item.status) }}
+                </span>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewSmsDetail(item)">
+                  <span class="material-symbols-outlined">visibility</span>
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteReceivedSms(item)">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </td>
+            </tr>
+
+            @if (filteredSmsHistory.length === 0) {
+              <tr>
+                <td colspan="7" class="empty-row">
+                  Chưa có SMS phản hồi từ người dân.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span>
+          Hiển thị {{ displayStart }} đến {{ displayEnd }} trong {{ filteredSmsHistory.length }} mục
+        </span>
+
+        <div class="pagination">
+          <button
+            type="button"
+            [disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)">
+            ‹
+          </button>
+
+          <button
+            type="button"
+            *ngFor="let page of pages"
+            [class.active]="page === currentPage"
+            (click)="changePage(page)">
+            {{ page }}
+          </button>
+
+          <button
+            type="button"
+            [disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)">
+            ›
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
+
+</section>
+
+<section class="sms-guide-card">
+  <div class="card-title">
+    <div class="title-icon">
+      <span class="material-symbols-outlined">info</span>
+    </div>
+
+    <h3>HƯỚNG DẪN SỬ DỤNG</h3>
+  </div>
+
+  <div class="guide-grid">
+
+    <div class="guide-item blue">
+      <span class="material-symbols-outlined">person_check</span>
+      <div>
+        <b>1. Chọn chế độ gửi</b>
+        <p>Gửi từng số hoặc gửi toàn bộ người dân</p>
+      </div>
+    </div>
+
+    <div class="guide-item green">
+      <span class="material-symbols-outlined">phone_iphone</span>
+      <div>
+        <b>2. Nhập số điện thoại</b>
+        <p>Chỉ cần nhập khi gửi từng cá nhân</p>
+      </div>
+    </div>
+
+    <div class="guide-item orange">
+      <span class="material-symbols-outlined">edit_note</span>
+      <div>
+        <b>3. Soạn tin nhắn</b>
+        <p>Nội dung ngắn gọn, tối đa 160 ký tự</p>
+      </div>
+    </div>
+
+    <div class="guide-item purple">
+      <span class="material-symbols-outlined">send</span>
+      <div>
+        <b>4. Gửi tin nhắn</b>
+        <p>Nhấn gửi SMS để gọi API thật</p>
+      </div>
+    </div>
+
+    <div class="guide-item sky">
+      <span class="material-symbols-outlined">monitoring</span>
+      <div>
+        <b>5. Theo dõi phản hồi</b>
+        <p>Xem SMS người dân phản hồi bên phải</p>
+      </div>
+    </div>
+
+  </div>
+</section>

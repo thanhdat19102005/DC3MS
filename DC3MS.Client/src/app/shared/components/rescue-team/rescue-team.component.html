@@ -1,0 +1,402 @@
+<header class="main-banner">
+  <div class="banner-inner">
+<div class="brand">
+  ĐỘI CỨU HỘ: {{ teamName }}
+</div>
+
+<!-- ===== THÊM: NGÀY GIỜ HIỆN TẠI ===== -->
+<div class="banner-time">
+  {{ currentDateTime }}
+</div>
+
+<button class="logout-btn" (click)="onLogout()">ĐĂNG XUẤT</button>
+    
+  </div>
+</header>
+
+<div class="dashboard-layout">
+
+  <!-- =========================
+       SIDEBAR TRÁI
+  ========================== -->
+ <aside
+  class="sidebar"
+  [class.expanded]="sidebarExpanded"
+  [class.pinned]="sidebarPinned"
+  (mouseenter)="expandSidebar()"
+  (mouseleave)="collapseSidebar()">
+
+  <div class="sidebar-top">
+    <span class="menu-title">MENU</span>
+
+   <button
+  class="pin-btn"
+  [class.active]="sidebarPinned"
+  (click)="toggleSidebar()"
+  [title]="sidebarPinned ? 'Bỏ ghim menu' : 'Ghim menu'">
+
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none">
+
+    <path
+      d="M15 3L21 9L17.5 10.5L14.5 13.5L16 20L14 22L10 15L6.5 18.5L5.5 17.5L9 14L2 10L4 8L10.5 9.5L13.5 6.5L15 3Z"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linejoin="round"/>
+
+  </svg>
+
+</button>
+  </div>
+
+  <div class="sidebar-section">ĐIỀU PHỐI</div>
+
+  <button
+    class="sidebar-item"
+    [class.active]="activeTab === 'pending'"
+    (click)="switchTab('pending')">
+    <span class="menu-icon"></span>
+    <span class="menu-text">Yêu cầu khẩn cấp</span>
+  </button>
+
+  <button
+    class="sidebar-item"
+    [class.active]="activeTab === 'accepted'"
+    (click)="switchTab('accepted')">
+    <span class="menu-icon"></span>
+    <span class="menu-text">Đã nhận</span>
+  </button>
+
+  <button
+    class="sidebar-item"
+    [class.active]="activeTab === 'completed'"
+    (click)="switchTab('completed')">
+    <span class="menu-icon"></span>
+    <span class="menu-text">Đã hoàn thành</span>
+  </button>
+
+  <button
+    class="sidebar-item"
+    [class.active]="activeTab === 'map'"
+    (click)="switchTab('map')">
+    <span class="menu-icon"></span>
+    <span class="menu-text">Bản đồ</span>
+  </button>
+
+  <button
+    class="sidebar-item"
+    [class.active]="activeTab === 'stats'"
+    (click)="switchTab('stats')">
+    <span class="menu-icon"></span>
+    <span class="menu-text">Thống kê</span>
+  </button>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section">HỆ THỐNG</div>
+
+  <button class="sidebar-item">
+    <span class="menu-icon">🔔</span>
+    <span class="menu-text">Thông báo</span>
+    <b class="notice-badge">5</b>
+  </button>
+
+  <button class="sidebar-item">
+    <span class="menu-icon">❔</span>
+    <span class="menu-text">Trợ giúp</span>
+  </button>
+
+  <button
+  class="sidebar-item"
+  [class.active]="activeTab === 'settings'"
+  (click)="switchTab('settings')">
+  <span class="menu-icon">⚙️</span>
+  <span class="menu-text">Cài đặt</span>
+</button>
+
+
+
+<!-- =========================
+     THÔNG TIN ĐỘI
+========================== -->
+
+<div
+  class="sidebar-team-card"
+  *ngIf="sidebarExpanded || sidebarPinned">
+
+  <div class="team-card-title">
+    🛡 {{ teamName }}
+  </div>
+
+  <div
+    class="team-status"
+    [ngClass]="getStatusClass()">
+
+    <span class="status-dot"></span>
+
+    {{ getStatusText() }}
+
+  </div>
+
+
+
+</div>
+
+
+
+</aside>
+
+  <!-- =========================
+       CONTENT PHẢI
+  ========================== -->
+  <main class="dashboard-content">
+
+    <div class="main-wrapper">
+
+      <div class="dashboard-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Hệ thống điều phối cứu hộ khẩn cấp</p>
+        </div>
+        <button class="refresh-btn" (click)="onRefresh()">🔄 Làm Mới</button>
+      </div>
+
+      <div class="nav-tabs">
+        <button class="tab" [class.active]="activeTab === 'pending'" (click)="switchTab('pending')">
+          YÊU CẦU KHẨN CẤP
+        </button>
+
+        <button class="tab" [class.active]="activeTab === 'accepted'" (click)="switchTab('accepted')">
+          ĐÃ NHẬN
+        </button>
+
+        <button class="tab" [class.active]="activeTab === 'completed'" (click)="switchTab('completed')">
+          ĐÃ HOÀN THÀNH
+        </button>
+
+        <button class="tab" [class.active]="activeTab === 'map'" (click)="switchTab('map')">
+          BẢN ĐỒ
+        </button>
+
+        <button class="tab" [class.active]="activeTab === 'stats'" (click)="switchTab('stats')">
+          THỐNG KÊ
+        </button>
+      </div>
+
+      <div class="filter-container">
+        <div class="form-group">
+          <label class="floating-label">Loại cứu hộ</label>
+          <div class="custom-dropdown">
+            <select>
+              <option>Tất cả</option>
+              <option>Di Tản</option>
+              <option>Y Tế</option>
+              <option>Lương Thực</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="floating-label">Mức độ khẩn cấp</label>
+          <div class="custom-dropdown">
+            <select>
+              <option>Tất cả</option>
+              <option>Bình Thường</option>
+              <option>Khẩn Cấp</option>
+              <option>Nguy Kịch</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB PENDING -->
+      <div class="request-grid" *ngIf="activeTab === 'pending'">
+        <div class="request-card" *ngFor="let req of requests">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3>{{ req.type }}</h3>
+                <p class="card-subtitle">Yêu cầu cứu trợ khẩn cấp</p>
+              </div>
+              <span class="badge">{{ req.severity }}</span>
+            </div>
+
+            <div class="distance-info">
+              <span>📍 {{ req.distance }}</span>
+              <span>🚗 Đội: {{ teamName }}</span>
+            </div>
+
+            <p class="card-content">{{ req.content }}</p>
+
+            <div class="card-tags">
+              <span class="tag">👥 {{ req.people }} người</span>
+              <span class="tag" *ngIf="req.hasChildren">👶 Trẻ em</span>
+              <span class="tag" *ngIf="req.hasElderly">👴 Người già</span>
+              <span class="tag critical" *ngIf="req.isCritical">🚑 Nguy Kịch</span>
+            </div>
+
+            <div class="phone-row">
+              <span class="phone-num">📞 {{ req.phone }}</span>
+              <span class="time-stamp">🕒 {{ req.time }}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-accept" (click)="onAccept(req.id)">NHẬN HỖ TRỢ</button>
+            <button class="btn-detail" (click)="openDetail(req.id)">CHI TIẾT</button>
+            <button class="btn-cancel" (click)="onCancel(req.id, 'pending')">HỦY</button>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="requests.length === 0">
+          <div class="empty-icon">✅</div>
+          <p>Không có yêu cầu khẩn cấp nào</p>
+        </div>
+      </div>
+
+      <!-- TAB ACCEPTED -->
+      <div class="request-grid" *ngIf="activeTab === 'accepted'">
+        <div class="request-card accepted-card" *ngFor="let req of acceptedRequests">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3>{{ req.type }}</h3>
+                <p class="card-subtitle">Đang ứng cứu</p>
+              </div>
+              <span class="badge badge-accepted"> ĐÃ NHẬN</span>
+            </div>
+
+            <div class="distance-info">
+              <span>📍 {{ req.distance }}</span>
+              <span>🚗 Đội: {{ teamName }}</span>
+            </div>
+
+            <p class="card-content">{{ req.content }}</p>
+
+            <div class="card-tags">
+              <span class="tag">👥 {{ req.people }} người</span>
+              <span class="tag" *ngIf="req.hasChildren">👶 Trẻ em</span>
+              <span class="tag" *ngIf="req.hasElderly">👴 Người già</span>
+              <span class="tag critical" *ngIf="req.isCritical"> Nguy Kịch</span>
+            </div>
+
+            <div class="phone-row phone-row-accepted">
+              <span class="phone-num">📞 {{ req.phone }}</span>
+              <span class="time-stamp">🕒 {{ req.time }}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-complete" (click)="onComplete(req.id)">HOÀN THÀNH</button>
+            <button class="btn-detail" (click)="openDetail(req.id)">CHI TIẾT</button>
+            <button class="btn-cancel" (click)="onCancel(req.id, 'accepted')">HỦY</button>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="acceptedRequests.length === 0">
+          <div class="empty-icon">🚑</div>
+          <p>Chưa có yêu cầu nào đã nhận</p>
+        </div>
+      </div>
+
+      <!-- TAB COMPLETED -->
+      <div class="request-grid" *ngIf="activeTab === 'completed'">
+        <div class="request-card completed-card" *ngFor="let req of completedRequests">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <h3>{{ req.type }}</h3>
+                <p class="card-subtitle">Đã hoàn thành</p>
+              </div>
+              <span class="badge badge-done">✔ XONG</span>
+            </div>
+
+            <div class="distance-info">
+              <span>📍 {{ req.distance }}</span>
+              <span>🚗 Đội: {{ teamName }}</span>
+            </div>
+
+            <p class="card-content">{{ req.content }}</p>
+
+            <div class="card-tags">
+              <span class="tag">👥 {{ req.people }} người</span>
+              <span class="tag" *ngIf="req.hasChildren">👶 Trẻ em</span>
+              <span class="tag" *ngIf="req.hasElderly">👴 Người già</span>
+              <span class="tag critical" *ngIf="req.isCritical"> Nguy Kịch</span>
+            </div>
+
+            <div class="phone-row phone-row-done">
+              <span class="phone-num">📞 {{ req.phone }}</span>
+              <span class="time-stamp">
+                🕒 {{ req.time }}
+                <ng-container *ngIf="req.completedAt"> · ✅ {{ req.completedAt }}</ng-container>
+              </span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-detail" style="flex:1" (click)="openDetail(req.id)">
+              XEM CHI TIẾT
+            </button>
+            <button class="btn-cancel" (click)="onCancel(req.id, 'completed')">HỦY</button>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="completedRequests.length === 0">
+          <div class="empty-icon">📋</div>
+          <p>Chưa có yêu cầu nào được hoàn thành</p>
+        </div>
+      </div>
+
+      <!-- TAB MAP -->
+      <div *ngIf="activeTab === 'map'">
+     <app-rescue-map
+  [requests]="mapRequests"
+  (chatUserRequested)="openChatWithUser($event)">
+</app-rescue-map>
+      </div>
+
+      <!-- TAB STATS -->
+      <div *ngIf="activeTab === 'stats'">
+        <app-rescue-stats [requests]="mapRequests"></app-rescue-stats>
+      </div>
+
+     <!-- TAB SETTINGS -->
+<div *ngIf="activeTab === 'settings'">
+ <app-rescue-settings
+  (statusChanged)="onStatusChanged($event)">
+</app-rescue-settings>
+</div>
+
+
+
+
+    </div>
+
+  </main>
+
+</div>
+
+@if (isDetailOpen) {
+  <app-rescue-detail
+    [request]="selectedRequest"
+    (close)="closeDetail()">
+  </app-rescue-detail>
+}
+
+
+@if (isUserChatOpen) {
+  <app-rescue-team-chat
+    [selectedRequest]="selectedChatRequest"
+    [teamId]="teamId"
+    [teamName]="teamName"
+    (closeChat)="closeUserChat()">
+  </app-rescue-team-chat>
+}
+
+
+
+

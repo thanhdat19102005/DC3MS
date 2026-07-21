@@ -1,0 +1,338 @@
+<div class="settings-wrapper">
+
+  <div class="settings-header">
+    <h1>Cài đặt</h1>
+    <p>Quản lý thông tin đội, tài khoản và tùy chọn hệ thống</p>
+  </div>
+
+  <div class="settings-layout">
+
+    <div class="settings-left">
+
+      <!-- =========================
+           THÔNG TIN ĐỘI CỨU HỘ
+      ========================== -->
+      <div class="settings-card team-info-card">
+        <div class="card-title">
+          <h3>Thông tin đội cứu hộ</h3>
+        </div>
+
+        <div class="team-form">
+
+          <div class="avatar-upload-box">
+
+            <div class="team-logo">
+
+              <img
+                *ngIf="teamAvatar"
+                [src]="teamAvatar"
+                alt="Avatar đội"
+                class="team-avatar">
+
+              <div
+                *ngIf="!teamAvatar"
+                class="shield-icon">
+                ✚
+              </div>
+
+            </div>
+
+            <div class="avatar-info">
+              <strong>Ảnh đại diện</strong>
+              <span>JPG, PNG tối đa 2MB</span>
+            </div>
+
+            <label class="upload-btn">
+              ⬆ Chọn ảnh
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                (change)="onAvatarSelected($event)">
+            </label>
+
+          </div>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Tên đội</label>
+              <input [(ngModel)]="teamInfo.TeamName">
+            </div>
+
+            <div class="form-group">
+              <label>Ngày thành lập</label>
+              <input
+                type="date"
+                [(ngModel)]="foundedDate"
+                readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input
+                [(ngModel)]="teamInfo.ContactPhone"
+                readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Số thành viên</label>
+              <input
+                type="number"
+                [(ngModel)]="teamInfo.MemberCount">
+            </div>
+
+            <div class="form-group">
+              <label>Quận / Huyện</label>
+              <input [(ngModel)]="teamInfo.District">
+            </div>
+
+            <div class="form-group">
+              <label>Tỉnh / Thành phố</label>
+              <input [(ngModel)]="teamInfo.Province">
+            </div>
+
+            <div class="form-group full">
+              <label>Mô tả đội</label>
+              <textarea [(ngModel)]="teamInfo.Description"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card-actions-right">
+          <button
+            class="save-btn"
+            (click)="saveTeamInfo()">
+            Lưu thông tin đội
+          </button>
+        </div>
+      </div>
+
+      <!-- =========================
+           CÀI ĐẶT THÔNG BÁO
+      ========================== -->
+      <div class="settings-card">
+        <div class="card-title">
+          <span class="title-icon red">🔔</span>
+          <h3>Cài đặt thông báo</h3>
+        </div>
+
+        <div class="setting-list">
+
+          <div class="setting-row">
+            <div>
+              <strong>Thông báo yêu cầu khẩn cấp mới</strong>
+              <p>Nhận thông báo khi có yêu cầu cứu hộ mới trong khu vực</p>
+            </div>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                [(ngModel)]="notificationSettings.newRequest">
+              <span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Thông báo khi được phân công</strong>
+              <p>Nhận thông báo khi đội được phân công nhiệm vụ</p>
+            </div>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                [(ngModel)]="notificationSettings.assignedRequest">
+              <span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Thông báo cập nhật trạng thái</strong>
+              <p>Nhận thông báo khi trạng thái yêu cầu được cập nhật</p>
+            </div>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                [(ngModel)]="notificationSettings.statusUpdated">
+              <span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>Thông báo hệ thống</strong>
+              <p>Nhận các thông báo quan trọng từ hệ thống</p>
+            </div>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                [(ngModel)]="notificationSettings.systemAlert">
+              <span></span>
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =========================
+           QUẢN LÝ DỮ LIỆU
+      ========================== -->
+      <div class="settings-card">
+        <div class="card-title">
+          <span class="title-icon red">🗄️</span>
+          <h3>Quản lý dữ liệu</h3>
+        </div>
+
+        <div class="data-grid">
+
+          <div class="data-box">
+            <div class="data-icon blue">☁</div>
+            <strong>Xuất dữ liệu</strong>
+            <p>Tải xuống dữ liệu đội cứu hộ về máy tính</p>
+            <button (click)="exportData()">Xuất dữ liệu</button>
+          </div>
+
+          <div class="data-box">
+            <div class="data-icon blue">⬆</div>
+            <strong>Nhập dữ liệu</strong>
+            <p>Nhập dữ liệu đội cứu hộ từ file backup</p>
+            <button (click)="importData()">Nhập dữ liệu</button>
+          </div>
+
+          <div class="data-box danger">
+            <div class="data-icon red-bg">🗑</div>
+            <strong>Xóa dữ liệu</strong>
+            <p>Xóa tất cả dữ liệu không thể khôi phục</p>
+            <button (click)="deleteData()">Xóa dữ liệu</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="settings-right">
+
+      <!-- =========================
+           TÀI KHOẢN & BẢO MẬT
+      ========================== -->
+      <div class="settings-card security-card">
+        <div class="card-title">
+          <span class="title-icon red">🔒</span>
+          <h3>Tài khoản & bảo mật</h3>
+        </div>
+
+        <div class="password-form">
+
+          <label>Email đội</label>
+          <input
+            type="email"
+            [(ngModel)]="accountInfo.email"
+            readonly>
+
+          <label>Mật khẩu hiện tại</label>
+          <input
+            type="password"
+            [(ngModel)]="security.currentPassword"
+            placeholder="Nhập mật khẩu hiện tại">
+
+          <label>Mật khẩu mới</label>
+          <input
+            type="password"
+            [(ngModel)]="security.newPassword"
+            placeholder="Nhập mật khẩu mới">
+
+          <label>Xác nhận mật khẩu mới</label>
+          <input
+            type="password"
+            [(ngModel)]="security.confirmPassword"
+            placeholder="Nhập lại mật khẩu mới">
+
+          <button
+            class="save-btn full"
+            (click)="saveSecurityInfo()">
+            Lưu tài khoản & bảo mật
+          </button>
+
+        </div>
+      </div>
+
+      <!-- =========================
+           TRẠNG THÁI ĐỘI
+      ========================== -->
+      <div class="settings-card">
+        <div class="card-title">
+         
+          <h3>Trạng thái đội</h3>
+        </div>
+
+        <div class="team-status-box">
+
+          <p class="status-desc">
+            Cập nhật trạng thái hoạt động hiện tại của đội cứu hộ.
+          </p>
+
+          <label class="status-option">
+            <input
+              type="radio"
+              name="teamStatus"
+              [value]="2"
+              [(ngModel)]="teamInfo.Status">
+
+            <span class="status-dot green"></span>
+
+            <div>
+              <strong>Đang trực</strong>
+              <p>Đội đang hoạt động và có thể nhận yêu cầu cứu hộ mới.</p>
+            </div>
+          </label>
+
+          <label class="status-option">
+            <input
+              type="radio"
+              name="teamStatus"
+              [value]="1"
+              [(ngModel)]="teamInfo.Status">
+
+            <span class="status-dot orange"></span>
+
+            <div>
+              <strong>Tạm nghỉ</strong>
+              <p>Đội tạm thời không nhận yêu cầu cứu hộ mới.</p>
+            </div>
+          </label>
+
+          <label class="status-option">
+            <input
+              type="radio"
+              name="teamStatus"
+              [value]="0"
+              [(ngModel)]="teamInfo.Status">
+
+            <span class="status-dot red"></span>
+
+            <div>
+              <strong>Ngừng hoạt động</strong>
+              <p>Đội không còn tham gia điều phối cứu hộ.</p>
+            </div>
+          </label>
+
+          <button
+            class="save-btn full"
+            (click)="saveTeamInfo()">
+            Cập nhật trạng thái
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,623 @@
+.settings-wrapper {
+  width: 100%;
+}
+
+.settings-header {
+  margin-bottom: 24px;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.settings-header p {
+  margin-top: 6px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.settings-layout {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.settings-left,
+.settings-right {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.settings-card {
+  background: white;
+  border-radius: 22px;
+  padding: 24px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+}
+
+.team-info-card,
+.security-card {
+  min-height: 470px;
+}
+
+.security-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   CARD TITLE
+========================= */
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.card-title h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+.title-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-icon.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* =========================
+   TEAM FORM
+========================= */
+.team-form {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.avatar-upload-box {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.team-logo {
+  width: 220px;
+  height: 190px;
+  border-radius: 18px;
+  background: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid #fee2e2;
+}
+
+.team-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shield-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  font-size: 34px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(220, 38, 38, 0.3);
+}
+
+.avatar-info {
+  text-align: center;
+}
+
+.avatar-info strong {
+  display: block;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.avatar-info span {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.upload-btn {
+  border: 1.5px dashed #fecaca;
+  background: #fff7f7;
+  color: #dc2626;
+  border-radius: 14px;
+  padding: 13px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+/* =========================
+   FORM
+========================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 22px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label,
+.password-form label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.password-form input,
+.system-form select {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 11px 13px;
+  font-family: inherit;
+  font-weight: 600;
+  color: #334155;
+  outline: none;
+  background: #f8fafc;
+}
+
+.form-group input[readonly],
+.password-form input[readonly] {
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.form-group textarea {
+  height: auto;
+  min-height: 112px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus,
+.password-form input:focus,
+.system-form select:focus {
+  border-color: #dc2626;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.09);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.card-actions-right {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  border: none;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(220, 38, 38, 0.25);
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(220, 38, 38, 0.32);
+}
+
+.save-btn.full {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* =========================
+   SETTING LIST
+========================= */
+.setting-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+}
+
+.setting-row strong {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.setting-row p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.setting-row.compact {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* =========================
+   SWITCH
+========================= */
+.switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch span {
+  position: absolute;
+  inset: 0;
+  background: #cbd5e1;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.switch span::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+.switch input:checked + span {
+  background: #dc2626;
+}
+
+.switch input:checked + span::before {
+  transform: translateX(22px);
+}
+
+/* =========================
+   DATA MANAGEMENT
+========================= */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.data-box {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.data-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 22px;
+}
+
+.data-icon.blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.data-icon.red-bg {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.data-box strong {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.data-box p {
+  min-height: 38px;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.data-box button {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ef4444;
+  background: white;
+  color: #dc2626;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* =========================
+   SECURITY
+========================= */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.security-card .save-btn.full {
+  margin-top: auto;
+}
+
+/* =========================
+   SYSTEM OPTIONS
+========================= */
+.system-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* =========================
+   SWEET ALERT TOAST
+========================= */
+.rescue-toast {
+  border-radius: 12px !important;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18) !important;
+  border-left: 4px solid #dc2626 !important;
+}
+
+.rescue-toast-progress {
+  background: #dc2626 !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .team-info-card,
+  .security-card {
+    min-height: auto;
+  }
+
+  .team-form {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar-upload-box {
+    width: 100%;
+    align-items: center;
+  }
+
+  .team-logo {
+    width: 220px;
+    height: 190px;
+  }
+
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .settings-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+
+  .card-actions-right {
+    justify-content: stretch;
+  }
+
+  .save-btn {
+    width: 100%;
+  }
+
+  .setting-row {
+    align-items: flex-start;
+  }
+
+  .data-box p {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-card {
+    padding: 16px;
+  }
+
+  .card-title h3 {
+    font-size: 0.88rem;
+  }
+
+  .team-logo {
+    width: 100%;
+    height: 150px;
+  }
+
+  .shield-icon {
+    width: 62px;
+    height: 62px;
+    font-size: 28px;
+  }
+
+  .setting-row {
+    flex-direction: column;
+  }
+
+  .switch {
+    align-self: flex-start;
+  }
+}
+
+
+
+
+
+/* =========================
+   TEAM STATUS CARD
+========================= */
+.team-status-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.status-desc {
+  margin: 0 0 4px;
+  color: #64748b;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.status-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-option:hover {
+  background: #ffffff;
+  border-color: #fecaca;
+  transform: translateY(-2px);
+}
+
+.status-option input {
+  margin-top: 4px;
+  accent-color: #dc2626;
+}
+
+.status-option strong {
+  display: block;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.status-option p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.status-dot.green {
+  background: #16a34a;
+}
+
+.status-dot.orange {
+  background: #f59e0b;
+}
+
+.status-dot.red {
+  background: #dc2626;
+}
+
+/* Khi chọn radio thì card nổi bật hơn */
+.status-option:has(input:checked) {
+  background: #fff1f2;
+  border-color: #ef4444;
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.12);
+}
+

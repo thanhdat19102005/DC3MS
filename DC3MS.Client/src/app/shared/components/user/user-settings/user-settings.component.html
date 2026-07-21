@@ -1,0 +1,219 @@
+<div class="settings-overlay">
+  <div class="settings-panel">
+
+    <div class="settings-top">
+      <div class="settings-title">
+        <div class="title-icon">⚙</div>
+
+        <div>
+          <h2>Cài đặt tài khoản</h2>
+          <p>Quản lý thông tin cá nhân và bảo mật tài khoản của bạn</p>
+        </div>
+      </div>
+
+      <button class="close-btn" type="button" (click)="close()">
+        ×
+      </button>
+    </div>
+
+    <section class="settings-card">
+      <div class="card-title">
+        <h3>THÔNG TIN CÁ NHÂN</h3>
+      </div>
+
+      <div class="avatar-section">
+        <div class="avatar-wrapper">
+          <img
+            [src]="user.avatarUrl || 'assets/images/default-avatar.png'"
+            alt="Avatar"
+            class="avatar-image"
+          />
+        </div>
+
+        <div class="avatar-info">
+          <strong>Ảnh đại diện</strong>
+          <span>JPG, PNG tối đa 2MB</span>
+
+          <label class="avatar-select-btn">
+            Chọn ảnh
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              (change)="onAvatarSelected($event)"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Họ và Tên *</label>
+
+        <div class="input-box">
+          <input
+            type="text"
+            [(ngModel)]="user.fullName"
+            autocomplete="name"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Số điện thoại *</label>
+
+          <div class="input-box">
+            <span>☎</span>
+            <input
+              type="text"
+              [(ngModel)]="user.phone"
+              autocomplete="tel"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email *</label>
+
+          <div class="input-box">
+            <span>✉</span>
+            <input
+              type="email"
+              [(ngModel)]="user.email"
+              autocomplete="email"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Địa chỉ hiện tại *</label>
+
+        <div class="input-box">
+          <span>⌖</span>
+          <input
+            type="text"
+            [(ngModel)]="user.address"
+            autocomplete="street-address"
+          />
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button
+          class="save-btn"
+          type="button"
+          [disabled]="isSavingProfile"
+          (click)="saveProfile()">
+
+          {{ isSavingProfile ? 'Đang lưu...' : 'Lưu thông tin' }}
+
+        </button>
+      </div>
+    </section>
+
+    <section class="settings-card">
+      <div class="card-title">
+        <h3>ĐỔI MẬT KHẨU</h3>
+      </div>
+
+      <form autocomplete="off">
+        <input type="text" name="fake-user" autocomplete="username" hidden>
+        <input type="password" name="fake-pass" autocomplete="new-password" hidden>
+
+        <div class="form-group">
+          <label>Mật khẩu hiện tại *</label>
+
+          <div class="input-box">
+            <span>▣</span>
+
+            <input
+              [type]="showCurrentPassword ? 'text' : 'password'"
+              [(ngModel)]="password.currentPassword"
+              name="currentPassword"
+              placeholder="Nhập mật khẩu hiện tại"
+              autocomplete="new-password"
+            />
+
+            <button
+              class="eye-btn"
+              type="button"
+              (click)="showCurrentPassword = !showCurrentPassword">
+
+              👁
+
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Mật khẩu mới *</label>
+
+          <div class="input-box">
+            <span>▣</span>
+
+            <input
+              [type]="showNewPassword ? 'text' : 'password'"
+              [(ngModel)]="password.newPassword"
+              name="newPassword"
+              placeholder="Nhập mật khẩu mới"
+              autocomplete="new-password"
+            />
+
+            <button
+              class="eye-btn"
+              type="button"
+              (click)="showNewPassword = !showNewPassword">
+
+              👁
+
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Xác nhận mật khẩu mới *</label>
+
+          <div class="input-box">
+            <span>▣</span>
+
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              [(ngModel)]="password.confirmPassword"
+              name="confirmPassword"
+              placeholder="Nhập lại mật khẩu mới"
+              autocomplete="new-password"
+            />
+
+            <button
+              class="eye-btn"
+              type="button"
+              (click)="showConfirmPassword = !showConfirmPassword">
+
+              👁
+
+            </button>
+          </div>
+        </div>
+
+        <div class="card-actions">
+       <button
+  class="change-pass-btn"
+  type="button"
+  [disabled]="isChangingPassword"
+  (click)="changePassword()">
+
+  {{ isChangingPassword ? 'Đang đổi...' : 'Đổi mật khẩu' }}
+
+</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="settings-footer-note">
+      🛡 Thông tin của bạn được bảo mật tuyệt đối
+    </div>
+
+  </div>
+</div>

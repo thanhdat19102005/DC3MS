@@ -1,0 +1,432 @@
+<div class="team-management-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Quản lý đội cứu hộ</h2>
+      <p>Danh sách tài khoản đội cứu hộ trong hệ thống</p>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="create-btn" (click)="openCreate()">
+        <span class="material-symbols-outlined">add</span>
+        Tạo đội cứu hộ
+      </button>
+
+      <button type="button" class="refresh-btn" (click)="loadRescueTeams()">
+        <span class="material-symbols-outlined">refresh</span>
+        Làm mới
+      </button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="material-symbols-outlined">search</span>
+
+      <input
+        type="text"
+        placeholder="Tìm theo tên, email, số điện thoại,..."
+        [(ngModel)]="searchText"
+        (input)="onSearch()"
+      />
+    </div>
+
+    <div class="total-box">
+      Tổng tài khoản đội cứu hộ:
+      <b>{{ filteredTeams.length }}</b>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-box">
+      <span class="material-symbols-outlined loading-icon">progress_activity</span>
+      <p>Đang tải danh sách tài khoản đội cứu hộ...</p>
+    </div>
+  }
+
+  @if (!isLoading) {
+    <div class="table-card">
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-stt">STT</th>
+              <th>Tên đăng nhập</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Mã đội cứu trợ</th>
+              <th>Địa chỉ</th>
+              <th class="text-right">Thao tác</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of filteredTeams; track item.id; let i = $index) {
+              <tr>
+                <td>
+                  <span class="row-index">{{ i + 1 }}</span>
+                </td>
+
+                <td>
+                  <span class="main-text">
+                    {{ item.userName || 'Chưa có username' }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="muted-text">
+                    {{ item.email || 'Chưa có email' }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="muted-text">
+                    {{ item.phoneNumber || 'Chưa có SĐT' }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="rescue-id">
+                    {{ item.rescueTeamId }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="muted-text">
+                    {{ item.address || 'Chưa cập nhật' }}
+                  </span>
+                </td>
+
+                <td class="text-right">
+                  <div class="action-group">
+                    <button type="button" class="btn-detail" (click)="openDetail(item)">
+                      Chi tiết
+                    </button>
+
+                    <button type="button" class="btn-update" (click)="openUpdate(item)">
+                      Cập nhật
+                    </button>
+
+                    <button type="button" class="btn-delete" (click)="deleteTeamAccount(item.id)">
+                      Xóa
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (filteredTeams.length === 0) {
+        <div class="empty-state">
+          <span class="material-symbols-outlined">groups</span>
+          <p>Không có tài khoản đội cứu hộ nào.</p>
+        </div>
+      }
+
+      <div class="table-footer">
+        <span>
+          Hiển thị
+          <b>{{ filteredTeams.length > 0 ? 1 : 0 }}</b>
+          đến
+          <b>{{ filteredTeams.length }}</b>
+          trong
+          <b>{{ filteredTeams.length }}</b>
+          mục
+        </span>
+
+        <div class="pagination">
+          <button type="button" disabled>
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+
+          <button type="button" class="page-active">1</button>
+
+          <button type="button" disabled>
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  }
+
+  @if (isDetailLoading) {
+    <div class="detail-overlay">
+      <div class="detail-modal detail-loading-modal">
+        <div class="loading-box">
+          <span class="material-symbols-outlined loading-icon">progress_activity</span>
+          <p>Đang tải chi tiết đội cứu hộ...</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (selectedTeam) {
+    <div class="detail-overlay" (click)="closeDetail()">
+      <div class="detail-modal" (click)="$event.stopPropagation()">
+
+        <button type="button" class="close-detail" (click)="closeDetail()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="detail-header">
+          <div class="detail-avatar">
+            <span class="material-symbols-outlined">emergency_home</span>
+          </div>
+
+          <div>
+            <h3>{{ selectedTeam.teamName || 'Đội cứu hộ' }}</h3>
+            <p>Thông tin chi tiết từ bảng RescueTeam</p>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+
+          <div>
+            <span>Mã đội cứu hộ</span>
+            <b>{{ selectedTeam.id }}</b>
+          </div>
+
+          <div>
+            <span>Tên đội</span>
+            <b>{{ selectedTeam.teamName || 'Chưa có' }}</b>
+          </div>
+
+          <div>
+            <span>Số thành viên</span>
+            <b>{{ selectedTeam.memberCount || 0 }}</b>
+          </div>
+
+          <div>
+            <span>SĐT đội</span>
+            <b>{{ selectedTeam.contactPhone || 'Chưa có' }}</b>
+          </div>
+
+          <div>
+            <span>Tỉnh / Thành</span>
+            <b>{{ selectedTeam.province || 'Chưa có' }}</b>
+          </div>
+
+          <div>
+            <span>Quận / Huyện</span>
+            <b>{{ selectedTeam.district || 'Chưa có' }}</b>
+          </div>
+
+          <div>
+            <span>Trạng thái</span>
+            <b class="status-badge" [class]="getStatusClass(selectedTeam.status)">
+              {{ getStatusText(selectedTeam.status) }}
+            </b>
+          </div>
+
+          <div>
+            <span>Ngày tạo</span>
+            <b>{{ selectedTeam.createdAt | date:'dd/MM/yyyy HH:mm' }}</b>
+          </div>
+
+          <div>
+            <span>Latitude</span>
+            <b>{{ selectedTeam.latitude }}</b>
+          </div>
+
+          <div>
+            <span>Longitude</span>
+            <b>{{ selectedTeam.longitude }}</b>
+          </div>
+
+          <div class="detail-full">
+            <span>Mô tả</span>
+            <b>{{ selectedTeam.description || 'Chưa có mô tả' }}</b>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (isUpdateOpen && updateModel) {
+    <div class="detail-overlay" (click)="closeUpdate()">
+      <div class="detail-modal" (click)="$event.stopPropagation()">
+
+        <button type="button" class="close-detail" (click)="closeUpdate()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="detail-header">
+          <div class="detail-avatar">
+            <span class="material-symbols-outlined">edit_note</span>
+          </div>
+
+          <div>
+            <h3>Cập nhật tài khoản đội cứu hộ</h3>
+            <p>Chỉnh sửa thông tin trong bảng AspNetUsers</p>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+
+          <div>
+            <span>Họ và tên</span>
+            <input type="text" [(ngModel)]="updateModel.fullName" />
+          </div>
+
+          <div>
+            <span>Tên đăng nhập</span>
+            <input type="text" [(ngModel)]="updateModel.userName" />
+          </div>
+
+          <div>
+            <span>Email</span>
+            <input type="email" [(ngModel)]="updateModel.email" />
+          </div>
+
+          <div>
+            <span>Số điện thoại</span>
+            <input type="text" [(ngModel)]="updateModel.phoneNumber" />
+          </div>
+
+          <div class="detail-full">
+            <span>Địa chỉ</span>
+            <input type="text" [(ngModel)]="updateModel.address" />
+          </div>
+
+        </div>
+
+        <div class="update-actions">
+          <button type="button" class="btn-cancel-update" (click)="closeUpdate()">
+            Hủy
+          </button>
+
+          <button type="button" class="btn-save-update" (click)="submitUpdate()">
+            Lưu cập nhật
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  @if (isCreateOpen) {
+    <div class="detail-overlay" (click)="closeCreate()">
+      <div class="detail-modal" (click)="$event.stopPropagation()">
+
+        <button type="button" class="close-detail" (click)="closeCreate()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="detail-header">
+          <div class="detail-avatar">
+            <span class="material-symbols-outlined">add_home_work</span>
+          </div>
+
+          <div>
+            <h3>Tạo đội cứu hộ mới</h3>
+            <p>Nhập thông tin đội cứu hộ và tài khoản đăng nhập</p>
+          </div>
+        </div>
+
+        <div class="form-section-title">Thông tin đội cứu hộ</div>
+
+        <div class="detail-grid">
+
+          <div>
+            <span>Mã đội cứu hộ</span>
+            <input type="text" placeholder="Ví dụ: TEAM-HCM-Q1" [(ngModel)]="createModel.rescueTeamId" />
+          </div>
+
+          <div>
+            <span>Tên đội cứu hộ</span>
+            <input type="text" placeholder="Ví dụ: Đội Cứu Hộ Quận 1" [(ngModel)]="createModel.teamName" />
+          </div>
+
+          <div>
+            <span>Số thành viên</span>
+            <input type="number" placeholder="Ví dụ: 20" [(ngModel)]="createModel.memberCount" />
+          </div>
+
+          <div>
+            <span>Số điện thoại đội</span>
+            <input type="text" placeholder="Ví dụ: 0901234567" [(ngModel)]="createModel.contactPhone" />
+          </div>
+
+          <div>
+            <span>Tỉnh / Thành phố</span>
+            <input type="text" placeholder="Ví dụ: TP.HCM" [(ngModel)]="createModel.province" />
+          </div>
+
+          <div>
+            <span>Quận / Huyện</span>
+            <input type="text" placeholder="Ví dụ: Quận 1" [(ngModel)]="createModel.district" />
+          </div>
+
+          <div>
+            <span>Vĩ độ</span>
+            <input type="number" placeholder="Ví dụ: 10.7765" [(ngModel)]="createModel.latitude" />
+          </div>
+
+          <div>
+            <span>Kinh độ</span>
+            <input type="number" placeholder="Ví dụ: 106.701" [(ngModel)]="createModel.longitude" />
+          </div>
+
+          <div class="detail-full">
+            <span>Mô tả đội cứu hộ</span>
+            <input type="text" placeholder="Ví dụ: Đội quân trung tâm thành phố" [(ngModel)]="createModel.description" />
+          </div>
+
+        </div>
+
+        <div class="form-section-title">Thông tin tài khoản đăng nhập</div>
+
+        <div class="detail-grid">
+
+          <div>
+            <span>Họ và tên người phụ trách</span>
+            <input type="text" placeholder="Ví dụ: Nguyễn Văn A" [(ngModel)]="createModel.fullName" />
+          </div>
+
+          <div>
+            <span>Tên đăng nhập</span>
+            <input type="text" placeholder="Ví dụ: cuuho_q1" [(ngModel)]="createModel.userName" />
+          </div>
+
+          <div>
+            <span>Email</span>
+            <input type="email" placeholder="Ví dụ: cuuhoq1@gmail.com" [(ngModel)]="createModel.email" />
+          </div>
+
+          <div>
+            <span>Số điện thoại tài khoản</span>
+            <input type="text" placeholder="Ví dụ: 0902387951" [(ngModel)]="createModel.phoneNumber" />
+          </div>
+
+          <div>
+            <span>Mật khẩu</span>
+            <input type="password" placeholder="Nhập mật khẩu" [(ngModel)]="createModel.password" />
+          </div>
+
+          <div>
+            <span>Địa chỉ tài khoản</span>
+            <input type="text" placeholder="Ví dụ: Phố đi bộ, Quận 1" [(ngModel)]="createModel.address" />
+          </div>
+
+        </div>
+
+        <div class="update-actions">
+          <button type="button" class="btn-cancel-update" (click)="closeCreate()">
+            Hủy
+          </button>
+
+          <button type="button" class="btn-save-update" (click)="submitCreate()">
+            Tạo mới
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>

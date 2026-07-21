@@ -1,0 +1,153 @@
+<div class="guide-overlay" (click)="close()">
+  <div class="guide-modal" (click)="$event.stopPropagation()">
+    <div class="guide-header">
+      <div class="header-left">
+        <span class="guide-icon"></span>
+        <h2>Hướng Dẫn Sử Dụng</h2>
+      </div>
+      <button class="btn-close-top" (click)="close()">✕</button>
+    </div>
+
+    <div class="guide-body">
+      
+      @if (currentStep() === 1) {
+        <div class="step-layout animate-fade">
+          <div class="step-title-row">
+            <span class="step-num">1</span>
+            <div class="step-title-text">
+              <h3>Bước 1: Tạo Yêu Cầu Cứu Trợ</h3>
+              <p>Có 2 cách để tạo yêu cầu cứu trợ</p>
+            </div>
+          </div>
+
+          <div class="info-card card-blue">
+            <div class="card-icon"><i class="fa-solid fa-truck-medical"></i></div>
+            <div class="card-content">
+              <strong>Cứu Ngay (Khẩn Cấp)</strong>
+              <p>Nhấn nút "Cứu Ngay" màu đỏ ở góc dưới. Chỉ cần điền thông tin tối thiểu để gửi nhanh nhất.</p>
+            </div>
+          </div>
+
+          <div class="info-card card-green">
+            <div class="card-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+            <div class="card-content">
+              <strong>Yêu Cầu Chi Tiết</strong>
+              <p>Nhấn nút "Yêu Cầu Chi Tiết" để điền đầy đủ thông tin: số người, trẻ em, người già, tình trạng...</p>
+            </div>
+          </div>
+
+          <div class="feature-list">
+            <div class="feature-item"> <span><strong>Ghi âm:</strong> Hệ thống tự chuyển giọng nói thành văn bản.</span></div>
+            <div class="feature-item"> <span><strong>Ghi chú:</strong> Hoặc nhập trực tiếp bằng bàn phím.</span></div>
+          </div>
+        </div>
+      }
+
+      @if (currentStep() === 2) {
+        <div class="step-layout animate-fade">
+          <div class="banner-warning">
+            ⚠️ Vị trí là <strong>bắt buộc</strong> để đội cứu trợ có thể tìm và cứu bạn.
+          </div>
+
+          <div class="location-option">
+            <span class="loc-dot blue"></span>
+            <div class="loc-text">
+              <strong>Tự Động (Khuyến Nghị)</strong>
+              <p>Cho phép trình duyệt truy cập vị trí để lấy tọa độ GPS.</p>
+            </div>
+          </div>
+
+          <div class="location-option">
+            <span class="loc-dot green"></span>
+            <div class="loc-text">
+              <strong>Nhập Thủ Công</strong>
+              <p>Nếu GPS lỗi, bạn có thể nhập tọa độ (vĩ độ, kinh độ) thủ công.</p>
+            </div>
+          </div>
+
+          <div class="tip-box">
+             <strong>Mẹo:</strong> Bạn có thể lấy tọa độ từ Google Maps: Nhấn giữ vị trí trên bản đồ -> Copy tọa độ.
+          </div>
+        </div>
+      }
+
+      @if (currentStep() === 3) {
+        <div class="step-layout animate-fade">
+          <div class="step-title-row">
+            <span class="step-num">3</span>
+            <div class="step-title-text">
+              <h3>Bước 3: Theo Dõi Yêu Cầu</h3>
+              <p>Xem trạng thái yêu cầu của bạn</p>
+            </div>
+          </div>
+
+          <div class="banner-success">
+            ✅ Sau khi gửi, bạn sẽ nhận được mã yêu cầu và thông tin xác nhận.
+          </div>
+
+          <ul class="check-list">
+            <li> <strong>Xem "Yêu Cầu Của Tôi":</strong> Ở header để xem tất cả yêu cầu.</li>
+            <li>
+               <strong>Trạng Thái:</strong> 
+              <span class="badge badge-pending">Đang chờ</span>
+              <span class="badge badge-doing">Đang xử lý</span>
+              <span class="badge badge-done">Hoàn thành</span>
+            </li>
+            <li> <strong>Thông báo:</strong> Nhận tin báo khi có đội cứu trợ nhận yêu cầu.</li>
+          </ul>
+        </div>
+      }
+
+      @if (currentStep() === 4) {
+        <div class="step-layout animate-fade">
+          <div class="step-title-row">
+            <span class="step-num">4</span>
+            <div class="step-title-text">
+              <h3>Bước 4: Nhận Trợ Giúp</h3>
+              <p>Các tính năng bổ sung</p>
+            </div>
+          </div>
+
+          <div class="location-option">
+            <span class="loc-dot purple">💬</span>
+            <div class="loc-text">
+              <strong>Chatbot Kiến Thức Sinh Tồn</strong>
+              <p>Hỏi chatbot về các kỹ năng ứng phó trong lũ lụt.</p>
+            </div>
+          </div>
+
+          <div class="location-option">
+            <span class="loc-dot orange">🗺️</span>
+            <div class="loc-text">
+              <strong>Xem Bản Đồ</strong>
+              <p>Xem các điểm cứu trợ và vị trí các đội cứu hộ trên bản đồ.</p>
+            </div>
+          </div>
+
+          <div class="emergency-box">
+            <div class="emergency-header">🆘 Trường Hợp Cực Kỳ Khẩn Cấp:</div>
+            <p>Gọi ngay <strong>115</strong> (Cứu thương) hoặc <strong>113</strong> (Công an) nếu nguy hiểm tính mạng!</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="guide-footer">
+      <button class="btn-restart" (click)="reset()">Bắt Đầu Lại</button>
+      
+      <div class="nav-group">
+        @if (currentStep() > 1) {
+          <button class="btn-nav" (click)="prevStep()">❮ Quay Lại</button>
+        }
+        
+        @if (currentStep() < 4) {
+          <button class="btn-next" (click)="nextStep()">Tiếp Theo ❯</button>
+        } @else {
+          <button class="btn-next btn-finish" (click)="close()">Hoàn Thành</button>
+        }
+      </div>
+
+      <button class="btn-close-footer" (click)="close()">Đóng</button>
+    </div>
+  </div>
+</div>

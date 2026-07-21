@@ -1,0 +1,21 @@
+<div class="news-container">
+  <button routerLink="/user" class="back-btn">← Quay lại</button>
+  
+  <h2 class="news-header">Tin tức thiên tai cứu trợ</h2>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <p>Đang tải tin tức thiên tai mới nhất...</p>
+    </div>
+  } @else {
+    <div class="news-list">
+      @for (item of newsList; track item.link) {
+        <div class="news-item">
+          <h3 class="news-title">{{ item.title }}</h3>
+       <p class="news-summary" [innerHTML]="item.summary"></p>
+          <a [href]="item.link" target="_blank" class="news-link">Xem chi tiết</a>
+        </div>
+      }
+    </div>
+  }
+</div>

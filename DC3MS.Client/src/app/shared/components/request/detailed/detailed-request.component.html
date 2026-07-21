@@ -1,0 +1,151 @@
+<style>
+  @keyframes registerFadeIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes registerFadeOut {
+    from { opacity: 1; transform: scale(1) translateY(0); }
+    to { opacity: 0; transform: scale(0.9) translateY(20px); }
+  }
+  .register-popup-container {
+    animation: registerFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .register-popup-container.closing {
+    animation: registerFadeOut 0.25s ease-in forwards;
+  }
+</style>
+
+<div [class.is-closing]="isClosing()">
+  <div class="rescue-overlay" (click)="close()">
+    <div class="rescue-modal" (click)="$event.stopPropagation()" [formGroup]="rescueForm">
+      
+      <div class="modal-header">
+        <div class="header-main"><span class="sos-icon"></span><h2>Đơn Cứu Trợ Chi Tiết</h2></div>
+        <button class="close-x" (click)="close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="mini-alert">⚠️ <span>Vui lòng cung cấp chính xác thông tin để hỗ trợ điều phối.</span></div>
+        <div class="form-content">
+          
+          <div class="field">
+            <label>Loại Ứng Cứu *</label>
+            <select class="custom-select" formControlName="rescueType">
+              <option value="Di Tản">Di Tản</option>
+              <option value="Y Tế">Y Tế</option>
+              <option value="Lương Thực">Lương Thực</option>
+              <option value="Cứu Hộ Xuồng">Cứu Hộ Xuồng</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Mức Độ Khẩn Cấp *</label>
+            <select class="custom-select" formControlName="urgencyLevel">
+              <option value="Bình Thường">Bình Thường</option>
+              <option value="Khẩn Cấp">Khẩn Cấp</option>
+              <option value="Nguy Kịch">Nguy Kịch</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Số Người Cần Cứu Trợ *</label>
+            <div class="input-with-icon">
+              <span class="input-icon"></span>
+              <input type="number" class="custom-input-number" formControlName="peopleCount" min="1">
+            </div>
+            <small *ngIf="rescueForm.get('peopleCount')?.touched && rescueForm.get('peopleCount')?.invalid" class="error-text">
+              Số người tối thiểu là 1.
+            </small>
+          </div>
+
+          <div class="checkbox-row">
+            <label class="custom-checkbox">
+              <input type="checkbox" formControlName="hasChildren">
+              <span class="checkbox-label">👶 Có Trẻ Em</span>
+            </label>
+            <label class="custom-checkbox">
+              <input type="checkbox" formControlName="hasElderly">
+              <span class="checkbox-label">🧓 Có Người Già</span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label>Tình Trạng Sức Khỏe *</label>
+            <select class="custom-select" formControlName="healthStatus">
+              <option value="Bình Thường">Bình Thường</option>
+              <option value="Chấn Thương">Chấn Thương / Gãy Xương</option>
+              <option value="Đau Ốm Cấp Tính">Đau Ốm Cấp Tính / Sốt Cao</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Số Điện Thoại Liên Hệ (Nếu khác số đăng ký)</label>
+            <input type="text" class="custom-text-input" formControlName="alternativePhoneNumber" placeholder="Nhập số điện thoại phụ...">
+            
+            <small *ngIf="rescueForm.get('alternativePhoneNumber')?.invalid" class="error-text">
+              Vui lòng nhập đúng định dạng số điện thoại Việt Nam (10 số, bắt đầu bằng 03, 05, 07, 08, 09).
+            </small>
+          </div>
+
+          <div class="tab-bar">
+            <button type="button" [class.active]="tab() === 'note'" (click)="tab.set('note')"> Ghi Chữ</button>
+            <button type="button" [class.active]="tab() === 'voice'" (click)="tab.set('voice')"> Ghi Âm</button>
+          </div>
+
+          <div class="input-zone">
+            @if (tab() === 'note') {
+              <textarea class="custom-textarea" [(ngModel)]="transcript" [ngModelOptions]="{standalone: true}" placeholder="Mô tả nhu cầu của bạn..."></textarea>
+            } @else {
+              <div class="voice-box" [class.listening]="isListening">
+                <button type="button" class="mic-btn" (click)="toggleListening()" [class.pulse]="isListening">🎤</button>
+                <textarea class="voice-result" [(ngModel)]="transcript" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
+            }
+          </div>
+
+          <div class="gps-strip" [class.success]="locationString" (click)="getLocation()">
+            <span>{{ isFetching ? '⌛ Đang lấy...' : (locationString ? ' ' + locationString : ' Nhấn lấy tọa độ') }}</span>
+          </div>
+
+          <div class="upload-box">
+            <label>📸 Ảnh hiện trường</label>
+            <div class="custom-file-upload">
+              <input type="file" (change)="onFileSelected($event)" multiple accept="image/*" class="file-input">
+              <span class="upload-text">☁️ Nhấn để chọn ảnh</span>
+            </div>
+            @if (imagePreviews.length > 0) {
+              <div class="preview-container">
+                @for (url of imagePreviews; track $index) {
+                  <div class="preview-item">
+                    <img [src]="url" class="img-thumb">
+                    <button type="button" class="btn-remove" (click)="removeImage($index)">✕</button>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-back" (click)="close()" [disabled]="isSending">Hủy</button>
+        <button type="button" (click)="sendRequest()" class="btn-emergency" [disabled]="isSending || rescueForm.invalid">
+          {{ isSending ? '⌛ ĐANG GỬI...' : ' GỬI CỨU HỘ' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showRegisterForm()" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(4px);">
+  <div class="register-popup-container" [class.closing]="isRegisterClosing()" 
+       style="background: #ffffff !important; padding: 35px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); width: 100%; max-width: 480px; position: relative; margin: 20px;">
+    <button type="button" (click)="closeRegister()" style="position: absolute; top: 20px; right: 20px; border: none; background: none; font-size: 24px; color: #888; cursor: pointer; z-index: 10;">✕</button>
+    <app-register-relief 
+      (formSubmitted)="handleIncompleteProfileSubmit($event)"
+      (formClosed)="closeRegister()">
+    </app-register-relief>
+  </div>
+</div>

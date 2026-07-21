@@ -1,0 +1,252 @@
+<div class="stats-wrapper">
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon red">📋</div>
+      <div>
+        <p>Tổng yêu cầu</p>
+        <h2>{{ totalRequests }}</h2>
+        <span class="trend red-text">Tổng số ca ghi nhận</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon orange">🚑</div>
+      <div>
+        <p>Đang ứng cứu</p>
+        <h2>{{ acceptedCount }}</h2>
+        <span class="trend orange-text">Cần theo dõi tiến độ</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon green">✅</div>
+      <div>
+        <p>Hoàn thành</p>
+        <h2>{{ completedCount }}</h2>
+        <span class="trend green-text">Đã xử lý thành công</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon blue">📈</div>
+      <div>
+        <p>Tỉ lệ hoàn thành</p>
+        <h2>{{ completionRate }}%</h2>
+        <span class="trend blue-text">Đánh giá hiệu suất</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="analytics-grid">
+
+<!-- DONUT -->
+<div class="panel chart-panel">
+  <div class="panel-title-row">
+    <h3>Biểu đồ trạng thái cứu hộ</h3>
+    <span class="info-icon">ⓘ</span>
+  </div>
+
+  <div class="donut-area">
+
+    <div
+      class="donut-chart"
+      [style.background]="
+        'conic-gradient(#ef4444 0 ' +
+        (pendingCount / (totalRequests || 1) * 100) + '%, #f59e0b ' +
+        (pendingCount / (totalRequests || 1) * 100) + '% ' +
+        ((pendingCount + acceptedCount) / (totalRequests || 1) * 100) + '%, #16a34a ' +
+        ((pendingCount + acceptedCount) / (totalRequests || 1) * 100) + '% 100%)'
+      ">
+
+      <div class="donut-center">
+        <strong>{{ totalRequests }}</strong>
+        <span>Tổng</span>
+      </div>
+    </div>
+
+    <div class="legend status-legend">
+
+      <div class="legend-row">
+        <div class="legend-left">
+          <span class="dot red-dot"></span>
+          <span>Chờ xử lý</span>
+        </div>
+
+        <b>{{ pendingCount }}</b>
+
+        <strong>
+          {{ (pendingCount / (totalRequests || 1) * 100).toFixed(0) }}%
+        </strong>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-left">
+          <span class="dot orange-dot"></span>
+          <span>Đang ứng cứu</span>
+        </div>
+
+        <b>{{ acceptedCount }}</b>
+
+        <strong>
+          {{ (acceptedCount / (totalRequests || 1) * 100).toFixed(0) }}%
+        </strong>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-left">
+          <span class="dot green-dot"></span>
+          <span>Hoàn thành</span>
+        </div>
+
+        <b>{{ completedCount }}</b>
+
+        <strong>
+          {{ (completedCount / (totalRequests || 1) * 100).toFixed(0) }}%
+        </strong>
+      </div>
+
+      <div class="completion-note">
+        📈 Tỉ lệ hoàn thành:
+        <strong>{{ completionRate }}%</strong>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+    <!-- AI -->
+    <div class="panel ai-panel">
+      <h3>AI nhận xét tình hình</h3>
+
+      <div class="ai-box">
+        <div class="ai-avatar">🤖</div>
+
+        <div class="ai-content">
+          <p> {{ aiStatus }}</p>
+          <p> {{ aiSuggestion }}</p>
+          <p>
+             Loại cứu hộ xuất hiện nhiều nhất:
+            <strong>{{ mostCommonType }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHART ROW MỚI -->
+  <div class="chart-grid">
+
+    <!-- BAR CHART -->
+    <div class="panel">
+      <h3>Loại cứu hộ phổ biến</h3>
+
+    <div class="bar-chart">
+
+ <div class="bar-item" *ngFor="let item of rescueTypeStats">
+  <div class="bar-info">
+    <span>{{ item.type }}</span>
+    <b>{{ item.percent }}%</b>
+  </div>
+
+  <div class="bar-track">
+    <div
+      class="bar-fill dynamic-bar"
+      [style.width.%]="item.percent">
+    </div>
+  </div>
+</div>
+
+</div>
+    </div>
+
+    <!-- LINE CHART FAKE SVG -->
+    <div class="panel">
+      <h3>Xu hướng yêu cầu 7 ngày qua</h3>
+
+      <div class="trend-chart">
+
+  <div
+    class="trend-column"
+    *ngFor="let value of trendData; let i = index">
+
+    <div
+      class="trend-bar"
+      [style.height.%]="getTrendHeight(value)">
+    </div>
+
+    <span>{{ value }}</span>
+
+    <small>{{ trendLabels[i] }}</small>
+
+  </div>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="bottom-grid">
+
+    <div class="panel">
+      <h3>Hiệu suất đội cứu hộ</h3>
+
+      <div class="performance-list">
+
+        <div>
+          <span> Thời gian phản hồi TB</span>
+       <strong>{{ avgProcessTime }} phút</strong>
+        </div>
+
+        <div>
+          <span> 
+            
+            Số người trung bình / yêu cầu</span>
+          <strong>{{ avgPeople }} người</strong>
+        </div>
+
+        <div>
+          <span> Yêu cầu nguy kịch</span>
+          <strong>{{ criticalCount }} ca</strong>
+        </div>
+
+        <div>
+          <span>⭐ Đánh giá hệ thống</span>
+          <strong class="status-good">Hoạt động ổn định</strong>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel priority-panel">
+      <h3>Yêu cầu cần ưu tiên</h3>
+
+      <div
+        class="priority-item"
+        *ngFor="let req of requests.slice(0, 4)">
+
+        <div>
+          <strong>#{{ req.id }} - {{ req.type }}</strong>
+          <p>{{ req.content }}</p>
+        </div>
+
+        <span
+          class="priority-badge"
+          [class.critical]="req.isCritical">
+          {{ req.severity || 'Bình thường' }}
+        </span>
+
+      </div>
+
+      <div class="empty-priority" *ngIf="requests.length === 0">
+        Chưa có yêu cầu cần phân tích.
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,336 @@
+<div class="rescue-app-container">
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-mark">≋</div>
+      <h1>Cứu Trợ Lũ Lụt</h1>
+    </div>
+
+    <div class="header-time">
+      {{ currentDateTime }}
+    </div>
+
+    <nav class="header-actions">
+      <button type="button" class="nav-btn active">
+        Trang chủ
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn"
+        (click)="toggleRequestHistory()">
+        Yêu cầu của tôi
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn"
+        (click)="toggleGuide()">
+        Hướng dẫn
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn"
+        routerLink="/news">
+        Tin tức
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn"
+        routerLink="/weather">
+        Thời tiết
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn"
+        (click)="toggleSettings()">
+        Cài đặt
+      </button>
+
+      <button
+        class="account-btn"
+        type="button"
+        (click)="logout()">
+        Đăng xuất
+      </button>
+    </nav>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="app-content">
+
+    <!-- HERO -->
+    <section class="hero-card">
+      <h2>CẦN HỖ TRỢ KHẨN CẤP?</h2>
+
+      <p>
+        Chúng tôi luôn sẵn sàng hỗ trợ bạn.
+        Vui lòng chọn hình thức gửi yêu cầu
+        phù hợp với tình trạng hiện tại của bạn.
+      </p>
+
+      <div class="hero-actions">
+        <button
+          type="button"
+          class="danger-btn"
+          (click)="toggleEmergency()">
+          <span class="btn-icon"></span>
+          GỬI YÊU CẦU KHẨN CẤP
+        </button>
+
+        <button
+          type="button"
+          class="primary-btn"
+          (click)="toggleDetailed()">
+          <span class="btn-icon"></span>
+          GỬI YÊU CẦU CHI TIẾT
+        </button>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard-grid">
+
+      <!-- WEATHER -->
+      <div class="panel weather-card">
+        <div class="panel-title">
+          <h3>🌧 THỜI TIẾT</h3>
+          <span>{{ weather.city }}</span>
+        </div>
+
+        <div class="weather-main">
+          <div class="rain-icon"></div>
+
+          <div>
+            <strong>{{ weather.temperature }}°C</strong>
+            <p>{{ weather.condition }}</p>
+          </div>
+        </div>
+
+        <div class="weather-info">
+          <div>
+            💧
+            <span>Độ ẩm</span>
+            <b>{{ weather.humidity }}%</b>
+          </div>
+
+          <div>
+            💨
+            <span>Gió</span>
+            <b>{{ weather.windSpeed }} km/h</b>
+          </div>
+
+          <div class="warning">
+            ⚠
+            <span>Cảnh báo</span>
+            <b>{{ weather.warning }}</b>
+          </div>
+        </div>
+
+        <button type="button" class="link-btn">
+          Xem dự báo chi tiết →
+        </button>
+      </div>
+
+      <!-- EMERGENCY CONTACT -->
+      <div class="panel emergency-contact-card">
+        <div class="emergency-header">
+          <div class="emergency-header-icon">☎</div>
+
+          <div>
+            <h3>LIÊN HỆ KHẨN CẤP</h3>
+            <p>Các số điện thoại khẩn cấp cần thiết</p>
+          </div>
+        </div>
+
+        <div class="contact-wrapper">
+
+          <div class="contact-row medical">
+            <div class="contact-number">115</div>
+            <div class="contact-content">
+              <strong>Cấp cứu y tế</strong>
+              <span>Hỗ trợ y tế khẩn cấp</span>
+            </div>
+          </div>
+
+          <div class="contact-row police">
+            <div class="contact-number">113</div>
+            <div class="contact-content">
+              <strong>Công an</strong>
+              <span>Hỗ trợ an ninh, trật tự</span>
+            </div>
+          </div>
+
+          <div class="contact-row fire">
+            <div class="contact-number">114</div>
+            <div class="contact-content">
+              <strong>Cứu hỏa & cứu nạn</strong>
+              <span>Ứng cứu sự cố cháy, nổ</span>
+            </div>
+          </div>
+
+          <div class="contact-row rescue">
+            <div class="contact-number">112</div>
+            <div class="contact-content">
+              <strong>Tổng đài khẩn cấp</strong>
+              <span>Cứu nạn, cứu hộ toàn quốc</span>
+            </div>
+          </div>
+
+          <div class="contact-row support">
+            <div class="contact-number">1900</div>
+            <div class="contact-content">
+              <strong>Tổng đài hỗ trợ</strong>
+              <span>Hỗ trợ 24/7</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="contact-footer">
+          🛡 Hãy lưu các số trên để sử dụng khi cần thiết
+        </div>
+      </div>
+
+      <!-- MY REQUEST -->
+      <div
+        class="panel my-request-card"
+        (click)="toggleRequestHistory()">
+
+        <div class="panel-title">
+          <h3>📋 YÊU CẦU CỦA TÔI</h3>
+        </div>
+
+        <div class="request-center">
+          <div class="request-icon">📋</div>
+
+          <p>
+            Xem trạng thái các yêu cầu
+            của bạn đã gửi
+          </p>
+
+          <button
+            type="button"
+            class="primary-small"
+            (click)="toggleRequestHistory(); $event.stopPropagation()">
+            Xem ngay →
+          </button>
+        </div>
+      </div>
+
+      <!-- AI CHAT -->
+      <div
+        class="panel ai-chat-card"
+        (click)="toggleChat()">
+
+        <div class="panel-title">
+          <h3>🤖 TRÒ CHUYỆN VỚI AI</h3>
+        </div>
+
+        <div class="ai-chat-center">
+          <div class="ai-icon">💬</div>
+
+          <p>
+            Hỏi AI về cứu trợ, thời tiết,
+            hướng dẫn an toàn và tình trạng khẩn cấp.
+          </p>
+
+          <button
+            type="button"
+            class="ai-chat-btn"
+            (click)="toggleChat(); $event.stopPropagation()">
+            Trò chuyện ngay →
+          </button>
+        </div>
+      </div>
+
+      <!-- USER RESCUE MAP -->
+      <div class="map-panel-wide">
+   <app-user-rescue-map
+  [userLocation]="userMapLocation"
+  (teamChatRequested)="openTeamChat($event)"
+  (activeRequestChanged)="onActiveRequestChanged($event)">
+</app-user-rescue-map>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div>
+      <strong>Cứu Trợ Lũ Lụt</strong>
+      <p>
+        Hệ thống cứu trợ lũ lụt -
+        Hành động vì cộng đồng
+      </p>
+    </div>
+
+    <p>
+      © 2024 Cứu Trợ Lũ Lụt.
+      All rights reserved.
+    </p>
+
+    <div class="footer-links">
+      <span>Điều khoản</span>
+      <span>Bảo mật</span>
+      <span>Liên hệ</span>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  @if (isChatOpen) {
+    <app-chatbot
+      (closeChat)="toggleChat()">
+    </app-chatbot>
+  }
+
+  @if (isGuideOpen) {
+    <app-guide
+      (closeGuide)="toggleGuide()">
+    </app-guide>
+  }
+
+  @if (isEmergencyOpen) {
+  <app-emergency-request
+  (closeRequest)="toggleEmergency()"
+  (requestCreated)="reloadRescueMap()">
+</app-emergency-request>
+  }
+
+  @if (isDetailedOpen) {
+  <app-detailed-request
+  (closeRequest)="toggleDetailed()"
+  (requestCreated)="reloadRescueMap()">
+</app-detailed-request>
+  }
+
+  @if (isRequestHistoryOpen) {
+    <app-request-history
+      (closeRequestHistory)="toggleRequestHistory()">
+    </app-request-history>
+  }
+
+  @if (isSettingsOpen) {
+    <app-user-settings
+      (closeSettings)="toggleSettings()">
+    </app-user-settings>
+  }
+
+@if (isTeamChatOpen) {
+  <app-team-chat
+    [selectedTeam]="selectedTeam"
+    [activeRequest]="activeRequestForMap"
+    (closeChat)="closeTeamChat()">
+  </app-team-chat>
+}
+
+
+
+
+</div>

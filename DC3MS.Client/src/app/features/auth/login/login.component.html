@@ -1,0 +1,216 @@
+
+<div
+  class="login-container"
+  [attr.data-role]="currentRole()">
+
+  <div class="login-card">
+
+    <!-- ================= ROLE TABS ================= -->
+    <div class="role-tabs">
+
+      <div class="tab-slider"></div>
+
+      <button
+        type="button"
+        [class.active]="currentRole() === 'user'"
+        (click)="setRole('user')">
+
+        Người Dân
+
+      </button>
+
+      <button
+        type="button"
+        [class.active]="currentRole() === 'team'"
+        (click)="setRole('team')">
+
+        Đội Cứu Trợ
+
+      </button>
+
+      <button
+        type="button"
+        [class.active]="currentRole() === 'admin'"
+        (click)="setRole('admin')">
+
+        Quản Trị
+
+      </button>
+
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <div class="login-header">
+
+      <!-- ICON -->
+      <div class="role-icon">
+
+        @if (currentRole() === 'user') {
+
+          <img
+            src="./icon/user.png"
+            alt="User Logo"
+          >
+
+        }
+
+        @else if (currentRole() === 'team') {
+
+          <img
+            src="./icon/rescue.png"
+            alt="Rescue Logo"
+          >
+
+        }
+
+        @else if (currentRole() === 'admin') {
+
+          <img
+            src="./icon/admin.png"
+            alt="Admin Logo"
+          >
+
+        }
+
+      </div>
+
+      <!-- TITLE -->
+      <h2>
+
+        {{
+          currentRole() === 'user'
+            ? 'Chào mừng bạn'
+            : currentRole() === 'team'
+              ? 'Đội Cứu Trợ'
+              : 'Quản Trị Viên'
+        }}
+
+      </h2>
+
+      <!-- DESCRIPTION -->
+      <p>
+
+        {{
+          currentRole() === 'user'
+            ? 'Đăng nhập để gửi yêu cầu hỗ trợ'
+            : 'Hệ thống Cứu Trợ Lũ Lụt'
+        }}
+
+      </p>
+
+    </div>
+
+    <!-- ================= LOGIN FORM ================= -->
+    <form
+      class="login-form"
+      (ngSubmit)="onLogin()">
+
+      <!-- PHONE / USERNAME -->
+      <div class="input-group">
+
+        <label>
+
+          {{
+            currentRole() === 'admin'
+              ? 'Tài khoản quản trị *'
+              : 'Số điện thoại *'
+          }}
+
+        </label>
+
+        <input
+          type="text"
+          name="phoneNumber"
+          [(ngModel)]="loginData.phoneNumber"
+
+          [placeholder]="
+            currentRole() === 'admin'
+              ? 'Nhập tài khoản...'
+              : 'Nhập số điện thoại...'
+          "
+
+          required
+        >
+
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="input-group">
+
+        <label>Mật khẩu *</label>
+
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="loginData.password"
+          placeholder="••••••••"
+          required
+        >
+
+      </div>
+
+      <!-- LOGIN BUTTON -->
+      <button
+        type="submit"
+        class="btn-login">
+
+        ĐĂNG NHẬP
+
+      </button>
+
+      <!-- FORGOT PASSWORD -->
+      <div
+        class="form-footer"
+        *ngIf="currentRole() !== 'team'">
+
+        <a href="#">
+          Quên mật khẩu?
+        </a>
+
+      </div>
+
+    </form>
+
+    <!-- ================= REGISTER ================= -->
+    <div
+      class="register-section"
+      *ngIf="currentRole() === 'user'">
+
+      <div class="divider">
+
+        <span>Hoặc</span>
+
+      </div>
+
+      <p>Chưa có tài khoản?</p>
+
+      <button
+        type="button"
+        class="btn-register"
+        (click)="onRegister()">
+
+        ĐĂNG KÝ NGAY
+
+      </button>
+
+    </div>
+
+  <!-- ================= GOOGLE LOGIN ================= -->
+    <div class="google-section" [hidden]="currentRole() !== 'user'">
+
+      <div class="divider">
+        <span>Hoặc đăng nhập với</span>
+      </div>
+
+      <div class="google-login-wrapper">
+        <div id="googleButton"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,188 @@
+/* Container bao phủ toàn màn hình với lớp phủ mờ */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('https://images.unsplash.com/photo-1547683905-f686c993aae5?q=80&w=2070');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card Đăng ký bo góc lớn */
+.register-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px; /* Rộng hơn login để chứa hàng đôi */
+  padding: 40px;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.role-icon {
+  width: 80px; height: 80px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.role-icon img { width: 60%; height: auto; }
+
+.auth-header h2 { font-size: 26px; color: #1a73e8; font-weight: 700; margin-bottom: 5px; }
+.auth-header p { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+/* Bố cục hàng đôi linh hoạt */
+.input-row {
+  display: flex;
+  gap: 15px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #eee;
+  border-radius: 14px;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+}
+
+/* Nút bấm chủ đạo */
+.btn-submit {
+  width: 100%;
+  padding: 15px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 10px 20px -5px rgba(26, 115, 232, 0.4);
+  transition: 0.3s;
+}
+
+.btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* Footer & Divider */
+.divider {
+  margin: 25px 0 15px;
+  border-top: 1px solid #eee;
+  position: relative;
+}
+
+.divider span {
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 0 10px;
+  font-size: 12px; color: #999;
+}
+
+.btn-back-login {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-back-login:hover { background: #f0f7ff; }
+
+/* RESPONSIVE: Tự động xuống hàng trên màn hình nhỏ */
+@media (max-width: 520px) {
+  .input-row { flex-direction: column; gap: 0; }
+  .register-card { padding: 25px 20px; border-radius: 0; height: 100%; max-width: none; }
+  .auth-container { padding: 0; }
+}
+
+
+
+.error-text {
+  color: #e74c3c;
+  font-size: 11px;
+  margin-top: 5px;
+  font-weight: 500;
+  display: block;
+  text-align: left;
+}
+
+/* Hiệu ứng khi nhấn submit mà có lỗi */
+.is-invalid {
+  border-color: #e74c3c !important;
+  background-color: #fff5f5 !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+.btn-submit {
+  /* Giữ màu xanh như cũ, không để disabled nữa */
+  cursor: pointer;
+}
+
+
+
+
+
+
+/* Chỉnh độ rộng của toàn bộ cái Card */
+.register-card {
+  width: 100%;
+  max-width: 500px; /* Số này càng nhỏ thì form càng hẹp, bạn có thể thử 450px hoặc 400px */
+  margin: 0 auto;   /* Căn giữa form */
+  padding: 20px;    /* Khoảng cách từ viền vào trong các ô nhập liệu */
+  border-radius: 12px; /* Bo góc cho đẹp */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
+}
+
+/* Chỉnh các ô input nhỏ lại một chút cho cân đối */
+.input-group input {
+  padding: 8px 12px; /* Giảm padding để ô input không bị quá to */
+  font-size: 14px;   /* Chỉnh cỡ chữ vừa phải */
+}
+
+/* Nếu bạn muốn các dòng chia đôi (input-row) thu hẹp khoảng cách */
+.input-row {
+  display: flex;
+  gap: 15px; /* Khoảng cách giữa 2 ô trên cùng 1 hàng */
+  margin-bottom: 10px;
+}
+
+
+::ng-deep .my-swal-button {
+  padding: 5px 15px !important; /* Chỉnh lại độ dày của nút */
+  font-size: 14px !important;    /* Chỉnh chữ nhỏ lại */
+  width: auto !important;        /* Để nút tự co theo chữ thay vì chiếm hết chiều ngang */
+}

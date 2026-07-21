@@ -1,0 +1,124 @@
+/* 1. CONTAINER CHÍNH CÓ ẢNH NỀN */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  /* Ảnh nền lũ lụt như yêu cầu */
+background: linear-gradient(
+              rgba(0,0,0,0.2),
+              rgba(0,0,0,0.2)
+            ),
+            url('/icon/background.png');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Lexend', sans-serif;
+  transition: all 0.5s ease;
+}
+
+/* 2. CARD TRẮNG HIỆN ĐẠI */
+.login-card {
+  background: rgba(255, 255, 255, 0.98);
+  width: 95%;
+  max-width: 440px;
+  padding: 45px 40px;
+  border-radius: 30px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+/* 3. ĐỊNH NGHĨA MÀU SẮC THEO VAI TRÒ */
+.login-container[data-role="user"] { --theme-color: #007bff; --theme-shadow: rgba(0,123,255,0.4); }
+.login-container[data-role="team"] { --theme-color: #dc3545; --theme-shadow: rgba(220,53,69,0.4); }
+.login-container[data-role="admin"] { --theme-color: #343a40; --theme-shadow: rgba(0,0,0,0.3); }
+
+/* 4. TAB CHUYỂN ĐỔI (SWITCHER) */
+.role-tabs {
+  display: flex; background: #f1f3f5; padding: 6px; border-radius: 16px; margin-bottom: 35px; position: relative;
+}
+
+.role-tabs button {
+  flex: 1; padding: 10px; border: none; background: transparent;
+  font-weight: 600; font-size: 14px; color: #666; cursor: pointer; z-index: 1;
+}
+
+.role-tabs button.active { color: var(--theme-color); }
+
+.tab-slider {
+  position: absolute; height: calc(100% - 12px); width: calc(33.33% - 8px);
+  background: white; border-radius: 12px; top: 6px; left: 6px;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.login-container[data-role="team"] .tab-slider { transform: translateX(100%); }
+.login-container[data-role="admin"] .tab-slider { transform: translateX(200%); }
+
+/* 5. ICON VÀ TIÊU ĐỀ */
+.role-icon {
+  width: 85px; height: 85px; background: #f8f9fa; color: var(--theme-color);
+  font-size: 32px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 20px; border: 2px solid #eee;
+}
+
+.login-header h2 { font-size: 28px; font-weight: 700; color: #333; margin-bottom: 8px; }
+
+/* 6. FORM NHẬP LIỆU */
+.input-group { text-align: left; margin-bottom: 20px; }
+.input-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #444; }
+.input-group input {
+  width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 15px;
+  outline: none; box-sizing: border-box; transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: var(--theme-color);
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* 7. NÚT ĐĂNG NHẬP (Đổ bóng loang màu) */
+.btn-login {
+  width: 100%; padding: 16px; background: var(--theme-color);
+  color: white; border: none; border-radius: 15px; font-weight: 700;
+  font-size: 16px; cursor: pointer; transition: 0.3s;
+  box-shadow: 0 12px 24px -6px var(--theme-shadow);
+}
+
+.btn-login:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+/* 8. PHẦN ĐĂNG KÝ (DÀNH CHO USER) */
+.divider { margin: 25px 0; border-top: 1px solid #eee; position: relative; text-align: center; }
+.divider span { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 12px; color: #999; }
+
+.btn-register {
+  width: 100%; padding: 12px; background: transparent; color: var(--theme-color);
+  border: 2px solid var(--theme-color); border-radius: 15px; font-weight: 700; cursor: pointer;
+}
+
+/* 9. RESPONSIVE CHO ĐIỆN THOẠI */
+@media (max-width: 480px) {
+  .login-card { border-radius: 0; height: 100vh; max-width: none; display: flex; flex-direction: column; justify-content: center; }
+}
+
+
+
+.role-icon {
+  width: 85px;
+  height: 85px;
+  background: #ffffff; /* Nền trắng của vòng tròn */
+  border-radius: 50%;   /* Làm tròn tuyệt đối */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border: 1px solid #eee; /* Viền mờ bao quanh như trong ảnh của bạn */
+  overflow: hidden;      /* Quan trọng: Cắt bỏ phần ảnh thừa nếu ảnh quá to */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.role-icon img {
+  width: 60%;          /* Chỉnh kích thước logo chiếm 60% vòng tròn để nhìn cân đối */
+  height: 60%;
+  object-fit: contain;  /* Đảm bảo logo không bị bóp méo */
+}

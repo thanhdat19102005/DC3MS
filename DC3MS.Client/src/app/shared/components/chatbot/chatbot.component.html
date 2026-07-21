@@ -1,0 +1,36 @@
+<div class="messenger-box">
+  <div class="chat-header">
+    <div class="user-info">
+      <div class="avatar-status">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="bot">
+        <span class="status-dot"></span>
+      </div>
+      <div class="text-info">
+        <span class="name">Hỗ Trợ Cứu Trợ</span>
+        <span class="status-text">Đang hoạt động</span>
+      </div>
+    </div>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <div class="chat-body" #scrollMe>
+    @for (msg of messages(); track $index) {
+      <div class="message-wrapper" [class.user-row]="msg.isUser">
+        @if (!msg.isUser) {
+          <img class="mini-avatar" src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png">
+        }
+        <div class="bubble-container">
+          <div class="bubble">{{ msg.text }}</div>
+          <span class="time">{{ msg.time }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="chat-footer">
+    <div class="input-wrapper">
+      <input type="text" [(ngModel)]="userInput" (keyup.enter)="send()" placeholder="Nhập tin nhắn...">
+      <button class="send-btn" (click)="send()" [disabled]="!userInput.trim()">➤</button>
+    </div>
+  </div>
+</div>

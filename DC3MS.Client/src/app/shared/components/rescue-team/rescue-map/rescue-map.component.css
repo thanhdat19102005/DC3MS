@@ -1,0 +1,152 @@
+.map-wrapper {
+  width: 100%;
+  height: 650px;
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+#rescue-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   LEAFLET POPUP
+========================= */
+
+:host ::ng-deep .leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.22);
+}
+
+:host ::ng-deep .leaflet-popup-content {
+  margin: 16px 18px;
+}
+
+:host ::ng-deep .map-popup {
+  min-width: 230px;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+}
+
+:host ::ng-deep .map-popup h3 {
+  margin: 0 0 10px;
+  color: #b91c1c;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+:host ::ng-deep .map-popup p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.5;
+}
+
+:host ::ng-deep .map-popup strong {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+
+:host ::ng-deep .status-wrapper {
+  margin-top: 14px;
+}
+
+:host ::ng-deep .status-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+/* 0 - CHỜ XỬ LÝ */
+:host ::ng-deep .status-pending {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.3);
+}
+
+/* 1 - ĐANG ỨNG CỨU */
+:host ::ng-deep .status-rescuing {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+}
+
+/* 2 - HOÀN THÀNH */
+:host ::ng-deep .status-completed {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  box-shadow: 0 3px 10px rgba(22, 163, 74, 0.3);
+}
+
+/* UNKNOWN */
+:host ::ng-deep .status-unknown {
+  background: #64748b;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .map-wrapper {
+    height: 520px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-wrapper {
+    height: 450px;
+    border-radius: 16px;
+  }
+
+  :host ::ng-deep .map-popup {
+    min-width: 200px;
+  }
+}
+
+
+
+:host ::ng-deep .popup-action-row {
+  margin-top: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .chat-user-btn {
+  height: 34px;
+
+  padding: 0 14px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 18px rgba(37, 99, 235, 0.28);
+
+  transition: all 0.25s ease;
+}
+
+:host ::ng-deep .chat-user-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 24px rgba(37, 99, 235, 0.38);
+}

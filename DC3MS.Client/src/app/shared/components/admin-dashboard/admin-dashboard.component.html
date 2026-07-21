@@ -1,0 +1,414 @@
+<div class="admin-layout">
+
+  <aside
+    class="admin-sidebar"
+    [class.expanded]="sidebarExpanded"
+    [class.pinned]="sidebarPinned"
+    (mouseenter)="expandSidebar()"
+    (mouseleave)="collapseSidebar()">
+
+    <div class="sidebar-header">
+      <div class="brand-icon">
+        <span class="material-symbols-outlined fill">shield</span>
+      </div>
+
+      <div class="brand-text">
+        <h2>DC3MS</h2>
+        <p>Hệ thống Cứu Trợ Lũ Lụt</p>
+      </div>
+
+      <button
+        class="pin-btn"
+        [class.active]="sidebarPinned"
+        (click)="toggleSidebar()">
+        <span class="material-symbols-outlined">push_pin</span>
+      </button>
+    </div>
+
+    <div class="sidebar-scroll">
+
+      <div class="sidebar-section">Quản lý hệ thống</div>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'teams'"
+        (click)="switchMenu('teams')">
+        <span class="material-symbols-outlined menu-icon">groups</span>
+        <span class="menu-text">Quản lý đội cứu hộ</span>
+      </button>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'admins'"
+        (click)="switchMenu('admins')">
+        <span class="material-symbols-outlined menu-icon">admin_panel_settings</span>
+        <span class="menu-text">Quản lý quản trị viên</span>
+      </button>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'news'"
+        (click)="switchMenu('news')">
+        <span class="material-symbols-outlined menu-icon">newspaper</span>
+        <span class="menu-text">Quản lý tin tức</span>
+      </button>
+
+    <button
+  class="sidebar-item"
+  [class.active]="activeMenu === 'rescue-contact'"
+  (click)="switchMenu('rescue-contact')">
+  <span class="material-symbols-outlined menu-icon">support_agent</span>
+  <span class="menu-text">Liên hệ đội cứu hộ</span>
+</button>
+
+   <button
+  class="sidebar-item"
+  [class.active]="activeMenu === 'sms-rescue'"
+  (click)="switchMenu('sms-rescue')">
+  <span class="material-symbols-outlined menu-icon">sms</span>
+  <span class="menu-text">Gửi SMS cứu hộ</span>
+</button>
+
+
+
+
+      <div class="sidebar-section">Thống kê - Báo cáo</div>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'stats'"
+        (click)="switchMenu('stats')">
+        <span class="material-symbols-outlined menu-icon">analytics</span>
+        <span class="menu-text">Thống kê tổng quan</span>
+      </button>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'rescue-rate'"
+        (click)="switchMenu('rescue-rate')">
+        <span class="material-symbols-outlined menu-icon">query_stats</span>
+        <span class="menu-text">Tỉ lệ cứu hộ theo đội</span>
+      </button>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'reports'"
+        (click)="switchMenu('reports')">
+        <span class="material-symbols-outlined menu-icon">description</span>
+        <span class="menu-text">Báo cáo xuất Excel</span>
+      </button>
+
+      <div class="sidebar-section">Cài đặt</div>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'settings'"
+        (click)="switchMenu('settings')">
+        <span class="material-symbols-outlined menu-icon">settings</span>
+        <span class="menu-text">Cài đặt chung</span>
+      </button>
+
+   <button
+  class="sidebar-item logout-item"
+  type="button"
+  (click)="logoutSystem()">
+  <span class="material-symbols-outlined menu-icon">logout</span>
+  <span class="menu-text">Đăng xuất hệ thống</span>
+</button>
+
+      <button
+        class="sidebar-item"
+        [class.active]="activeMenu === 'logs'"
+        (click)="switchMenu('logs')">
+        <span class="material-symbols-outlined menu-icon">history</span>
+        <span class="menu-text">Nhật ký hoạt động</span>
+      </button>
+
+    </div>
+<div
+  class="admin-clock-mini"
+  *ngIf="sidebarExpanded || sidebarPinned">
+
+  {{ currentDateTime }}
+
+</div>
+
+  </aside>
+
+  <main
+    class="admin-main"
+    [class.sidebar-open]="sidebarExpanded || sidebarPinned">
+
+
+  
+
+    @if (activeMenu === 'stats') {
+      <section class="dashboard-header">
+        <div>
+          <h1>Thống kê tổng quan</h1>
+          <p>Theo dõi hiệu quả xử lý yêu cầu cứu hộ của toàn hệ thống</p>
+        </div>
+
+        <button type="button" (click)="loadStatistics()">
+          <span class="material-symbols-outlined">refresh</span>
+          Làm mới
+        </button>
+      </section>
+
+      @if (isStatisticsLoading) {
+        <div class="panel loading-panel">
+          <span class="material-symbols-outlined loading-icon">progress_activity</span>
+          <p>Đang tải dữ liệu thống kê...</p>
+        </div>
+      }
+
+      @if (statisticsError) {
+        <div class="alert danger">
+          <strong>{{ statisticsError }}</strong>
+          <p>Vui lòng kiểm tra lại API hoặc quyền đăng nhập.</p>
+        </div>
+      }
+
+      @if (!isStatisticsLoading && !statisticsError) {
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon purple">
+              <span class="material-symbols-outlined">support</span>
+            </div>
+            <div>
+              <p>Tổng yêu cầu</p>
+              <h2>{{ totalRequests }}</h2>
+              <span>Yêu cầu cứu hộ đã ghi nhận</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange">
+              <span class="material-symbols-outlined">pending_actions</span>
+            </div>
+            <div>
+              <p>Đang xử lý</p>
+              <h2>{{ totalProcessingRequests }}</h2>
+              <span>{{ totalPendingRequests }} yêu cầu đang chờ</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <span class="material-symbols-outlined">task_alt</span>
+            </div>
+            <div>
+              <p>Hoàn thành</p>
+              <h2>{{ totalCompletedRequests }}</h2>
+              <span>Tỉ lệ hoàn thành {{ completionRate }}%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <span class="material-symbols-outlined">groups</span>
+            </div>
+            <div>
+              <p>Người cần cứu trợ</p>
+              <h2>{{ totalPeopleNeedHelp }}</h2>
+              <span>Tổng số người trong yêu cầu</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <span class="material-symbols-outlined">timer</span>
+            </div>
+            <div>
+              <p>Phản ứng TB</p>
+              <h2>{{ averageResponseMinutes }} phút</h2>
+              <span>Thời gian nhận ca trung bình</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid">
+          <div class="panel large">
+            <div class="panel-header">
+              <h3>Trạng thái yêu cầu cứu hộ</h3>
+            </div>
+
+            <div class="chart-box">
+              <div class="donut">
+                <div>
+                  <h2>{{ totalRequests }}</h2>
+                  <p>Tổng yêu cầu</p>
+                </div>
+              </div>
+
+              <div class="team-rate">
+                <div>
+                  <span>Chờ xử lý</span>
+                  <b>{{ totalPendingRequests }} - {{ getPercent(totalPendingRequests) }}%</b>
+                </div>
+
+                <div>
+                  <span>Đang cứu hộ</span>
+                  <b>{{ totalProcessingRequests }} - {{ getPercent(totalProcessingRequests) }}%</b>
+                </div>
+
+                <div>
+                  <span>Hoàn thành</span>
+                  <b>{{ totalCompletedRequests }} - {{ getPercent(totalCompletedRequests) }}%</b>
+                </div>
+
+                <div>
+                  <span>Đã hủy</span>
+                  <b>{{ totalCanceledRequests }} - {{ getPercent(totalCanceledRequests) }}%</b>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Hiệu quả theo đội</h3>
+
+            <div class="team-list">
+              @for (item of teamStatistics; track item.rescueTeamId) {
+                <div class="team-stat-row">
+                  <div>
+                    <strong>{{ item.teamName || item.rescueTeamId }}</strong>
+                    <span>{{ item.completedRequests || 0 }}/{{ item.totalRequests || 0 }} yêu cầu hoàn thành</span>
+                  </div>
+
+                  <b>{{ getTeamCompletionRate(item) }}%</b>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Nhận xét tình hình</h3>
+
+            <div class="alert info">
+              <strong>Hệ thống ghi nhận {{ totalRequests }} yêu cầu cứu hộ.</strong>
+              <p>
+                Có {{ totalPeopleNeedHelp }} người cần cứu trợ,
+                {{ totalCompletedRequests }} yêu cầu đã hoàn thành.
+              </p>
+            </div>
+
+            <div class="alert warning">
+              <strong>Cần theo dõi yêu cầu chưa xử lý.</strong>
+              <p>
+                Còn {{ totalPendingRequests }} yêu cầu chờ xử lý
+                và {{ totalProcessingRequests }} yêu cầu đang cứu hộ.
+              </p>
+            </div>
+          </div>
+        </section>
+      }
+    }
+
+    @if (activeMenu === 'rescue-rate') {
+    <section class="dashboard-header">
+  <div>
+    <h1>Tỉ lệ cứu hộ theo đội</h1>
+    <p>
+      So sánh số lượng yêu cầu, số người cần cứu trợ và tỉ lệ hoàn thành của từng đội
+    </p>
+  </div>
+
+  <div class="header-actions">
+    <button
+      type="button"
+      class="excel-btn"
+      (click)="exportRescueRateExcel()">
+
+      <span class="material-symbols-outlined">
+        download
+      </span>
+
+      Xuất Excel
+    </button>
+
+    <button
+      type="button"
+      (click)="loadStatistics()">
+
+      <span class="material-symbols-outlined">
+        refresh
+      </span>
+
+      Làm mới
+    </button>
+  </div>
+</section>
+
+      <section class="panel large">
+        @if (isStatisticsLoading) {
+          <p>Đang tải dữ liệu...</p>
+        }
+
+        @if (!isStatisticsLoading) {
+          <div class="rescue-rate-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Đội cứu hộ</th>
+                  <th>Tổng yêu cầu</th>
+                  <th>Chờ xử lý</th>
+                  <th>Đang cứu hộ</th>
+                  <th>Hoàn thành</th>
+                  <th>Đã hủy</th>
+                  <th>Người cần cứu trợ</th>
+                  <th>Tỉ lệ hoàn thành</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (item of teamStatistics; track item.rescueTeamId) {
+                  <tr>
+                    <td>
+                      <strong>{{ item.teamName || item.rescueTeamId }}</strong>
+                      <span>{{ item.rescueTeamId }}</span>
+                    </td>
+
+                    <td>{{ item.totalRequests || 0 }}</td>
+                    <td>{{ item.pendingRequests || 0 }}</td>
+                    <td>{{ item.processingRequests || 0 }}</td>
+                    <td>{{ item.completedRequests || 0 }}</td>
+                    <td>{{ item.canceledRequests || 0 }}</td>
+                    <td>{{ item.totalPeopleNeedHelp || 0 }}</td>
+
+                    <td>
+                      <b class="rate-badge">
+                        {{ getTeamCompletionRate(item) }}%
+                      </b>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </section>
+    }
+
+    @if (activeMenu === 'teams') {
+      <app-admin-rescue-team-management></app-admin-rescue-team-management>
+    }
+
+    @if (activeMenu === 'admins') {
+      <app-admin-account-management></app-admin-account-management>
+    }
+
+
+   @if (activeMenu === 'rescue-contact') {
+  <app-admin-rescue-contact-map></app-admin-rescue-contact-map>
+}
+
+
+   @if (activeMenu === 'sms-rescue') {
+  <app-admin-sms-rescue></app-admin-sms-rescue>
+}
+
+
+  </main>
+
+</div>

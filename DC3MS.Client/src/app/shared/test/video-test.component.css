@@ -1,0 +1,139 @@
+.video-page {
+  width: 100%;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  border-radius: 20px;
+  overflow: hidden;
+  background: black;
+}
+
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.local-video {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 280px;
+  height: 180px;
+  border-radius: 16px;
+  border: 3px solid white;
+  object-fit: cover;
+  background: black;
+  z-index: 5;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.actions button {
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-camera {
+  background: #2563eb;
+}
+
+.btn-call {
+  background: #16a34a;
+}
+
+.btn-end {
+  background: #ef4444;
+}
+
+.incoming-call {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.72);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  color: white;
+}
+
+.incoming-card {
+  width: 340px;
+  padding: 28px 24px;
+  border-radius: 24px;
+  background: white;
+  color: #0f172a;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+.incoming-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #dbeafe;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+}
+
+.incoming-card h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.incoming-card p {
+  margin: 0 0 22px;
+  color: #64748b;
+}
+
+.incoming-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.incoming-actions button {
+  flex: 1;
+  height: 44px;
+  border-radius: 14px;
+  border: none;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background: #ef4444;
+}
+
+.btn-answer {
+  background: #16a34a;
+}
