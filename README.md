@@ -4,7 +4,8 @@
 
 Develop a disaster rescue management system that allows citizens to easily send emergency requests for help and enables rescue teams to coordinate and manage response operations efficiently
 
-
+# Installation and User Guide
+https://drive.google.com/drive/folders/19Ekb7n4aLpBECoXZMnDVAJdXqajrWcVh?usp=sharing
 
 ## Main Features
 
