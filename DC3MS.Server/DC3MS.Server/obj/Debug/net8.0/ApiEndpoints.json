@@ -1,0 +1,1179 @@
+[
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "Account/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Auth.LoginViewModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "requestedRole",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AccountController",
+    "Method": "Logout",
+    "RelativePath": "Account/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AccountController",
+    "Method": "Profile",
+    "RelativePath": "Account/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AccountController",
+    "Method": "Register",
+    "RelativePath": "Account/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Auth.RegisterViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AccountController",
+    "Method": "RegisterRelief",
+    "RelativePath": "Account/registerRelief",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.RegisterRelief",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminAccountController",
+    "Method": "CreateAdminAccount",
+    "RelativePath": "api/admin/accounts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.CreateAdminAccountDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminAccountController",
+    "Method": "UpdateAdminAccount",
+    "RelativePath": "api/admin/accounts/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.UpdateAdminAccountDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminAccountController",
+    "Method": "DeleteAdminAccount",
+    "RelativePath": "api/admin/accounts/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminAccountController",
+    "Method": "GetAdminAccounts",
+    "RelativePath": "api/admin/accounts/admin-accounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "GetRescueTeamAccounts",
+    "RelativePath": "api/admin/rescue-teams",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "DeleteRescueTeamAccount",
+    "RelativePath": "api/admin/rescue-teams/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "UpdateRescueTeamAccount",
+    "RelativePath": "api/admin/rescue-teams/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.UpdateRescueTeamAccountDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "CreateRequestForTeam",
+    "RelativePath": "api/admin/rescue-teams/create-request-for-team",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SenderName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Latitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Longitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "MediaPaths",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "PickedUpAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CompletedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResolutionNotes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeamId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.TeamName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.MemberCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.ContactPhone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Province",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.District",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.UpdatedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Latitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Longitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.AvatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.FileAttachments",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileAttachments",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "UrgencyLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PeopleCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "HasChildren",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "HasElderly",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "HealthStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AlternativePhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Distance",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "CreateTeamWithAccount",
+    "RelativePath": "api/admin/rescue-teams/create-team-with-account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.CreateTeamWithAccountDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "GetRescueTeamDetail",
+    "RelativePath": "api/admin/rescue-teams/detail/{rescueTeamId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rescueTeamId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.AdminRescueTeamController",
+    "Method": "GetRescueTeamRequestStatistics",
+    "RelativePath": "api/admin/rescue-teams/request-statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.NewsController",
+    "Method": "GetAll",
+    "RelativePath": "api/News",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueChatController",
+    "Method": "GetHistory",
+    "RelativePath": "api/RescueChat/history",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teamId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetAllTeams",
+    "RelativePath": "api/RescueTeam",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DC3MS.Server.Models.RescueTeam, DC3MS.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "CreateTeam",
+    "RelativePath": "api/RescueTeam",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamInput",
+        "Type": "DC3MS.Server.Models.RescueTeam",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DC3MS.Server.Models.RescueTeam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetTeamById",
+    "RelativePath": "api/RescueTeam/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DC3MS.Server.Models.RescueTeam",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "UpdateTeam",
+    "RelativePath": "api/RescueTeam/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TeamName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MemberCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactPhone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Province",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "District",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "UpdatedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Latitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Longitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileAttachments",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "DeleteTeam",
+    "RelativePath": "api/RescueTeam/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "AcceptRequest",
+    "RelativePath": "api/RescueTeam/accept-request/{requestId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetActiveTeams",
+    "RelativePath": "api/RescueTeam/active-teams",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "CancelRequest",
+    "RelativePath": "api/RescueTeam/cancel-request/{requestId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/RescueTeam/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "input",
+        "Type": "DC3MS.Server.Models.Auth.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "CompleteRequest",
+    "RelativePath": "api/RescueTeam/complete-request/{requestId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetMyCompletedRequests",
+    "RelativePath": "api/RescueTeam/my-completed-requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetMyRescuingRequests",
+    "RelativePath": "api/RescueTeam/my-rescuing-requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetMyTeamProfile",
+    "RelativePath": "api/RescueTeam/my-team-profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetMyTeamRequests",
+    "RelativePath": "api/RescueTeam/my-team-requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.RescueTeamController",
+    "Method": "GetRequestDetail",
+    "RelativePath": "api/RescueTeam/request-detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.SmsController",
+    "Method": "ReceiveSms",
+    "RelativePath": "api/Sms/receive",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.ReceiveSmsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.SmsController",
+    "Method": "GetReceivedSms",
+    "RelativePath": "api/Sms/received",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.SmsController",
+    "Method": "DeleteReceivedSms",
+    "RelativePath": "api/Sms/received/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.SmsController",
+    "Method": "SendSms",
+    "RelativePath": "api/Sms/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.SendSmsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.SmsController",
+    "Method": "SendSmsToAllCitizens",
+    "RelativePath": "api/Sms/send-all-citizens",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.Admin.SendSmsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.ChatController",
+    "Method": "Chat",
+    "RelativePath": "Chat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DC3MS.Server.Models.ChatRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.GoogleAuthController",
+    "Method": "GoogleLogin",
+    "RelativePath": "GoogleAuth/google-login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DC3MS.Server.Models.Auth.Google.GoogleLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "Delete",
+    "RelativePath": "User/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "Update",
+    "RelativePath": "User/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedRequest",
+        "Type": "DC3MS.Server.Models.RescueRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "ChangePassword",
+    "RelativePath": "User/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DC3MS.Server.Models.User.UserChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "Create",
+    "RelativePath": "User/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SenderName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Latitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Longitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "MediaPaths",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "PickedUpAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CompletedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResolutionNotes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeamId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.TeamName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.MemberCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.ContactPhone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Province",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.District",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.UpdatedAt",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Latitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Longitude",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.AvatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.FileAttachments",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "RescueTeam.Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileAttachments",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "UrgencyLevel",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PeopleCount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "HasChildren",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "HasElderly",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "HealthStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AlternativePhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Distance",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "GetActiveRequest",
+    "RelativePath": "User/my-active-request",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "GetMyActiveRequestLocation",
+    "RelativePath": "User/my-active-request-location",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "GetProfile",
+    "RelativePath": "User/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DC3MS.Server.Controllers.UserController",
+    "Method": "UpdateProfile",
+    "RelativePath": "User/update-profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileAttachments",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

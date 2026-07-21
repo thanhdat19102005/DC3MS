@@ -1,0 +1,151 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\LOCAL HOST\\DC3MS.Server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\repositories\\seedingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\repositories\\seedingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\controllers\\adminrescueteamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\controllers\\adminrescueteamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\controllers\\smscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\controllers\\smscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\models\\admin\\createadminaccountdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\models\\admin\\createadminaccountdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|f:\\local host\\dc3ms.server\\dc3ms.server\\models\\user\\userprofiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{626C1AB4-1167-2572-87B5-CBBEA8B4143D}|DC3MS.Server\\DC3MS.Server.csproj|solutionrelative:dc3ms.server\\models\\user\\userprofiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 510,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateAdminAccountDto.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Models\\Admin\\CreateAdminAccountDto.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Models\\Admin\\CreateAdminAccountDto.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Models\\Admin\\CreateAdminAccountDto.cs",
+              "RelativeToolTip": "DC3MS.Server\\Models\\Admin\\CreateAdminAccountDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T17:59:38.333Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\appsettings.json",
+              "RelativeDocumentMoniker": "DC3MS.Server\\appsettings.json",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\appsettings.json",
+              "RelativeToolTip": "DC3MS.Server\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-20T13:00:58.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Program.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Program.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Program.cs",
+              "RelativeToolTip": "DC3MS.Server\\Program.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAQwLIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T13:48:18.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SmsController.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\SmsController.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Controllers\\SmsController.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\SmsController.cs",
+              "RelativeToolTip": "DC3MS.Server\\Controllers\\SmsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T00:49:37.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminRescueTeamController.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\AdminRescueTeamController.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Controllers\\AdminRescueTeamController.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\AdminRescueTeamController.cs",
+              "RelativeToolTip": "DC3MS.Server\\Controllers\\AdminRescueTeamController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAiwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T00:41:25.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Controllers\\AccountController.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "DC3MS.Server\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAkwDoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T02:18:03.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SeedingData.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Repositories\\SeedingData.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Repositories\\SeedingData.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Repositories\\SeedingData.cs",
+              "RelativeToolTip": "DC3MS.Server\\Repositories\\SeedingData.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T23:03:24.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserProfileDto.cs",
+              "DocumentMoniker": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Models\\User\\UserProfileDto.cs",
+              "RelativeDocumentMoniker": "DC3MS.Server\\Models\\User\\UserProfileDto.cs",
+              "ToolTip": "F:\\LOCAL HOST\\DC3MS.Server\\DC3MS.Server\\Models\\User\\UserProfileDto.cs",
+              "RelativeToolTip": "DC3MS.Server\\Models\\User\\UserProfileDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-05T11:13:51.929Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

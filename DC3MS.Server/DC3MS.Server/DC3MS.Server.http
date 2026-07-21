@@ -1,0 +1,6 @@
+@DC3MS.Server_HostAddress = http://localhost:5190
+
+GET {{DC3MS.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
